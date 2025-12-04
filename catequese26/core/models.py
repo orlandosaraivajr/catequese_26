@@ -1,0 +1,69 @@
+from django.db import models
+
+class CatequeseInfantilModel(models.Model):
+    SEXO_CHOICES = (
+        ("M", "Masculino"),
+        ("F", "Feminino"),
+    )
+    
+    HORARIO_CATEQUESE = (
+        ("1", "Pré-Catequese - Segunda às 19:30h"),
+        ("2", "Pré-Catequese - Terça às 19:30h"),
+        ("3", "Pré-Catequese - Sábado às 09h"),
+        ("4", "Pré-Catequese - Sábado às 10:30h"),
+        ("5", "1a Etapa - Segunda às 19:30h"),
+        ("6", "1a Etapa - Terça às 19:30h"),
+        ("7", "1a Etapa - Quarta às 19:30h"),
+        ("8", "1a Etapa - Sábado às 09h"),
+        ("9", "1a Etapa - Sábado às 10:30h"),
+        ("10", "12+ - Terça às 19:30h"),
+        ("11", "12+ - Quinta ás 19:30h"),
+    )
+
+    nome = models.CharField(max_length=150)
+    sexo = models.CharField(max_length=1, choices=SEXO_CHOICES)
+    data_nascimento = models.DateField()
+    naturalidade = models.CharField(max_length=100, blank=True, null=True)
+
+    nome_pai = models.CharField(max_length=150, blank=True, null=True)
+    nome_mae = models.CharField(max_length=150, blank=True, null=True)
+
+    endereco = models.CharField(max_length=255)
+    cidade = models.CharField(max_length=100)
+    uf = models.CharField(max_length=2)
+
+    celular_pai = models.CharField(max_length=20, blank=True, null=True)
+    celular_mae = models.CharField(max_length=20, blank=True, null=True)
+
+    batizado = models.BooleanField(default=False)
+    batizado_data = models.DateField(blank=True, null=True)
+    batizado_diocese = models.CharField(max_length=150, blank=True, null=True)
+    batizado_paroquia = models.CharField(max_length=150, blank=True, null=True)
+    batizado_celebrante = models.CharField(max_length=150, blank=True, null=True)
+    
+    horario = models.CharField(max_length=2, choices=HORARIO_CATEQUESE)
+    
+    possui_deficiencia = models.BooleanField(default=False)
+    descricao_deficiencia = models.TextField(blank=True, null=True)
+    
+    possui_transtorno = models.BooleanField(default=False)
+    descricao_transtorno = models.TextField(blank=True, null=True)
+    
+    medicamento_uso_continuo = models.BooleanField(default=False)
+    descricao_medicamento = models.TextField(blank=True, null=True)
+    medicamento_horario = models.CharField(max_length=100, blank=True, null=True)
+    
+    acompanhamento_psicologico = models.BooleanField(default=False)
+    descricao_acompanhamento = models.TextField(blank=True, null=True)
+    
+    # Termo de uso de Imagem
+    
+    nome_responsavel = models.CharField(max_length=150)
+    cpf_responsavel = models.CharField(max_length=14)
+    endereco_responsavel = models.CharField(max_length=255)
+    
+    # Ficha Impressa
+    ficha_impressa = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.nome
