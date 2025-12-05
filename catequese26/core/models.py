@@ -67,3 +67,59 @@ class CatequeseInfantilModel(models.Model):
 
     def __str__(self):
         return self.nome
+
+
+class CrismaModel(models.Model):
+    SEXO_CHOICES = (
+        ("M", "Masculino"),
+        ("F", "Feminino"),
+    )
+    HORARIO_CRISMA = (
+        ("1", "Quinta às 19:30h"),
+        ("2", "Sábado às 09h"),
+        ("3", "Sábado às 10:30h"),
+    )
+    
+    nome = models.CharField(max_length=150)
+    sexo = models.CharField(max_length=1, choices=SEXO_CHOICES)
+    data_nascimento = models.DateField()
+    naturalidade = models.CharField(max_length=100, blank=True, null=True)
+
+    nome_pai = models.CharField(max_length=150, blank=True, null=True, default='')
+    nome_mae = models.CharField(max_length=150, blank=True, null=True, default='')
+
+    endereco = models.CharField(max_length=255)
+    cidade = models.CharField(max_length=100)
+    uf = models.CharField(max_length=2)
+
+    celular_pai = models.CharField(max_length=20, blank=True, null=True, default='')
+    celular_mae = models.CharField(max_length=20, blank=True, null=True, default='')
+
+    batizado = models.BooleanField(default=False)
+    batizado_data = models.DateField(blank=True, null=True)
+    batizado_diocese = models.CharField(max_length=150, blank=True, null=True)
+    batizado_paroquia = models.CharField(max_length=150, blank=True, null=True)
+    batizado_celebrante = models.CharField(max_length=150, blank=True, null=True)
+    
+    primeira_eucaristia = models.BooleanField(default=False)
+    primeira_eucaristia_data = models.DateField(blank=True, null=True)
+    primeira_eucaristia_diocese = models.CharField(max_length=150, blank=True, null=True)
+    primeira_eucaristia_paroquia = models.CharField(max_length=150, blank=True, null=True)
+    primeira_eucaristia_celebrante = models.CharField(max_length=150, blank=True, null=True)
+   
+    horario = models.CharField(max_length=2, choices=HORARIO_CRISMA)
+
+    padrinho_nome = models.CharField(max_length=150, blank=True, null=True, default='')    
+    padrinho_celular = models.CharField(max_length=20, blank=True, null=True, default='')
+    
+    # Termo de uso de Imagem
+    
+    nome_responsavel = models.CharField(max_length=150,default='')
+    cpf_responsavel = models.CharField(max_length=14,default='')
+    endereco_responsavel = models.CharField(max_length=255,default='')
+    
+    # Ficha Impressa
+    ficha_impressa = models.BooleanField(default=False)
+    
+    def __str__(self):
+        return self.nome
