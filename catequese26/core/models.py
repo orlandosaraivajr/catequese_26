@@ -25,15 +25,15 @@ class CatequeseInfantilModel(models.Model):
     data_nascimento = models.DateField()
     naturalidade = models.CharField(max_length=100, blank=True, null=True)
 
-    nome_pai = models.CharField(max_length=150, blank=True, null=True)
-    nome_mae = models.CharField(max_length=150, blank=True, null=True)
+    nome_pai = models.CharField(max_length=150, blank=True, null=True, default='')
+    nome_mae = models.CharField(max_length=150, blank=True, null=True, default='')
 
     endereco = models.CharField(max_length=255)
     cidade = models.CharField(max_length=100)
     uf = models.CharField(max_length=2)
 
-    celular_pai = models.CharField(max_length=20, blank=True, null=True)
-    celular_mae = models.CharField(max_length=20, blank=True, null=True)
+    celular_pai = models.CharField(max_length=20, blank=True, null=True, default='')
+    celular_mae = models.CharField(max_length=20, blank=True, null=True, default='')
 
     batizado = models.BooleanField(default=False)
     batizado_data = models.DateField(blank=True, null=True)

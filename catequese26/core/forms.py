@@ -7,6 +7,7 @@ class CatequeseInfantilForm(ModelForm):
     class Meta:
         model = CatequeseInfantilModel
         fields = '__all__'
+        exclude = ['ficha_impressa']
 
         labels = {
             'nome': 'Nome Completo:',
