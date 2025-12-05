@@ -7,7 +7,7 @@ class CatequeseInfantilForm(ModelForm):
     class Meta:
         model = CatequeseInfantilModel
         fields = '__all__'
-        exclude = ['ficha_impressa', 'ficha_impressa']
+        exclude = ['ficha_impressa', 'ficha_assinada']
 
         labels = {
             'nome': 'Nome Completo:',
@@ -162,7 +162,7 @@ class CrismaForm(ModelForm):
     class Meta:
         model = CrismaModel
         fields = '__all__'
-        exclude = ['ficha_impressa', 'ficha_impressa']
+        exclude = ['ficha_impressa', 'ficha_assinada']
 
         labels = {
 

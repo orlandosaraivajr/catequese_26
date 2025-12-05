@@ -36,6 +36,7 @@
                         <tr>
                             <th>Nome</th>
                             <th style="width: 150px;">Ação</th>
+                            <th style="width: 150px;"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -48,18 +49,27 @@
                                     <input type="hidden" name="ficha_id" value="{{ ficha.id }}">
 
                                     {% if ficha.ficha_impressa %}
-                                            <!-- Ficha já impressa → botão padrão -->
                                             <button class="btn btn-warning btn-sm" type="submit">
                                                 Reimprimir
                                             </button>
                                             
                                         {% else %}
-                                            <!-- Ficha ainda não impressa → botão amarelo e texto Reimprimir -->
                                             <button class="btn btn-primary btn-sm" type="submit">
                                                 Imprimir
                                             </button>
                                         {% endif %}
                                 </form>
+                            </td>
+                            <td>
+                                {% if ficha.ficha_impressa %}
+                                    <form method="POST" action="{% url 'core:assinar_ficha' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="ficha_id" value="{{ ficha.id }}">
+                                            <button class="btn btn-danger btn-sm" type="submit">
+                                                Assinada
+                                            </button>
+                                    </form>
+                                {% endif %}
                             </td>
                         </tr>
                         {% endfor %}
@@ -86,6 +96,7 @@
                         <tr>
                             <th>Nome</th>
                             <th style="width: 150px;">Ação</th>
+                            <th style="width: 150px;"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -110,6 +121,17 @@
                                             </button>
                                         {% endif %}
                                 </form>
+                            </td>
+                            <td>
+                                {% if ficha.ficha_impressa %}
+                                    <form method="POST" action="{% url 'core:assinar_ficha_crisma' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="ficha_id" value="{{ ficha.id }}">
+                                            <button class="btn btn-danger btn-sm" type="submit">
+                                                Assinada
+                                            </button>
+                                    </form>
+                                {% endif %}
                             </td>
                         </tr>
                         {% endfor %}
@@ -137,6 +159,7 @@
                         <tr>
                             <th>Nome</th>
                             <th style="width: 150px;">Ação</th>
+                            <th style="width: 150px;"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -161,6 +184,17 @@
                                             </button>
                                         {% endif %}
                                 </form>
+                            </td>
+                            <td>
+                                {% if ficha.ficha_impressa %}
+                                    <form method="POST" action="{% url 'core:assinar_ficha_perseveranca_mej' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="ficha_id" value="{{ ficha.id }}">
+                                            <button class="btn btn-danger btn-sm" type="submit">
+                                                Assinada
+                                            </button>
+                                    </form>
+                                {% endif %}
                             </td>
                         </tr>
                         {% endfor %}
@@ -188,6 +222,7 @@
                         <tr>
                             <th>Nome</th>
                             <th style="width: 150px;">Ação</th>
+                            <th style="width: 150px;"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -200,18 +235,27 @@
                                     <input type="hidden" name="ficha_id" value="{{ ficha.id }}">
 
                                     {% if ficha.ficha_impressa %}
-                                            <!-- Ficha já impressa → botão padrão -->
                                             <button class="btn btn-warning btn-sm" type="submit">
                                                 Reimprimir
                                             </button>
                                             
                                         {% else %}
-                                            <!-- Ficha ainda não impressa → botão amarelo e texto Reimprimir -->
                                             <button class="btn btn-primary btn-sm" type="submit">
                                                 Imprimir
                                             </button>
                                         {% endif %}
                                 </form>
+                            </td>
+                            <td>
+                                {% if ficha.ficha_impressa %}
+                                    <form method="POST" action="{% url 'core:assinar_ficha_adulto' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="ficha_id" value="{{ ficha.id }}">
+                                            <button class="btn btn-danger btn-sm" type="submit">
+                                                Assinada
+                                            </button>
+                                    </form>
+                                {% endif %}
                             </td>
                         </tr>
                         {% endfor %}

@@ -14,8 +14,16 @@ urlpatterns = [
     path('secretaria', views.listar_fichas, name='secretaria'),
     path('listar-fichas/', views.listar_fichas, name='listar_fichas'),
     path('listar-todas-fichas/', views.listar_todas_fichas, name='listar_todas_fichas'),
+    # Catequese Infantil
     path('imprimir-ficha', views.imprimir_ficha, name='imprimir_ficha'),
+    path('assinar-ficha', views.assinar_ficha, name='assinar_ficha'),
+    # Crisma
     path('imprimir-ficha-crisma', views.imprimir_ficha_crisma, name='imprimir_ficha_crisma'),
+    path('assinar-ficha-crisma', views.assinar_ficha_crisma, name='assinar_ficha_crisma'),
+    # Perseverança
     path('imprimir-ficha-perseveranca-mej', views.imprimir_ficha_perseveranca_mej, name='imprimir_ficha_perseveranca_mej'),
+    path('assinar-ficha-perseveranca-mej', views.assinar_ficha_perseveranca_mej, name='assinar_ficha_perseveranca_mej'),
+    # Catequese Adulto
     path('imprimir-ficha-adulto', views.imprimir_ficha_adulto, name='imprimir_ficha_adulto'),
+    path('assinar-ficha-adulto', views.assinar_ficha_adulto, name='assinar_ficha_adulto'),
 ]

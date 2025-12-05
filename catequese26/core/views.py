@@ -52,10 +52,10 @@ def procure_secretaria(request):
     return render(request, 'procure_secretaria.html')
 
 def listar_fichas(request):
-    fichas = CatequeseInfantilModel.objects.filter(ficha_impressa=False).order_by('nome')
-    fichasCrisma = CrismaModel.objects.filter(ficha_impressa=False).order_by('nome')
-    fichasMEJ = Perseveranca_MEJ_Model.objects.filter(ficha_impressa=False).order_by('nome')
-    fichasAdultos = CatequeseAdultoModel.objects.filter(ficha_impressa=False).order_by('nome')
+    fichas = CatequeseInfantilModel.objects.filter(ficha_impressa=False).filter(ficha_assinada=False).order_by('nome')
+    fichasCrisma = CrismaModel.objects.filter(ficha_impressa=False).filter(ficha_assinada=False).order_by('nome')
+    fichasMEJ = Perseveranca_MEJ_Model.objects.filter(ficha_impressa=False).filter(ficha_assinada=False).order_by('nome')
+    fichasAdultos = CatequeseAdultoModel.objects.filter(ficha_impressa=False).filter(ficha_assinada=False).order_by('nome')
     mensagem = 'Fichas Pendentes de Impressão'
     contexto = {'fichas': fichas,'fichasCrisma': fichasCrisma, 
                 'fichasMEJ': fichasMEJ,'fichasAdultos': fichasAdultos,
@@ -63,10 +63,10 @@ def listar_fichas(request):
     return render(request, 'listar_fichas.html', contexto)
 
 def listar_todas_fichas(request):
-    fichas = CatequeseInfantilModel.objects.all().order_by('nome')
-    fichasCrisma = CrismaModel.objects.all().order_by('nome')
-    fichasMEJ = Perseveranca_MEJ_Model.objects.all().order_by('nome')
-    fichasAdultos = CatequeseAdultoModel.objects.all().order_by('nome')
+    fichas = CatequeseInfantilModel.objects.all().filter(ficha_assinada=False).order_by('nome')
+    fichasCrisma = CrismaModel.objects.all().filter(ficha_assinada=False).order_by('nome')
+    fichasMEJ = Perseveranca_MEJ_Model.objects.all().filter(ficha_assinada=False).order_by('nome')
+    fichasAdultos = CatequeseAdultoModel.objects.all().filter(ficha_assinada=False).order_by('nome')
     mensagem = 'Fichas Pendentes de Impressão'
     contexto = {'fichas': fichas,'fichasCrisma': fichasCrisma, 
                 'fichasMEJ': fichasMEJ,'fichasAdultos': fichasAdultos,
@@ -83,6 +83,14 @@ def imprimir_ficha(request):
         return FileResponse(open(pdf_path, 'rb'), content_type='application/pdf')
     return redirect('core:listar_fichas')
 
+def assinar_ficha(request):
+    if request.method == 'POST':
+        ficha_id = request.POST.get('ficha_id')
+        ficha = get_object_or_404(CatequeseInfantilModel, id=ficha_id)
+        ficha.ficha_assinada = True
+        ficha.save()
+    return redirect('core:listar_fichas')
+
 def imprimir_ficha_crisma(request):
     if request.method == 'POST':
         ficha_id = request.POST.get('ficha_id')
@@ -91,6 +99,14 @@ def imprimir_ficha_crisma(request):
         ficha.save()
         pdf_path = gerar_ficha_crisma(ficha)
         return FileResponse(open(pdf_path, 'rb'), content_type='application/pdf')
+    return redirect('core:listar_fichas')
+
+def assinar_ficha_crisma(request):
+    if request.method == 'POST':
+        ficha_id = request.POST.get('ficha_id')
+        ficha = get_object_or_404(CrismaModel, id=ficha_id)
+        ficha.ficha_assinada = True
+        ficha.save()
     return redirect('core:listar_fichas')
 
 def imprimir_ficha_perseveranca_mej(request):
@@ -103,6 +119,14 @@ def imprimir_ficha_perseveranca_mej(request):
         return FileResponse(open(pdf_path, 'rb'), content_type='application/pdf')
     return redirect('core:listar_fichas')
 
+def assinar_ficha_perseveranca_mej(request):
+    if request.method == 'POST':
+        ficha_id = request.POST.get('ficha_id')
+        ficha = get_object_or_404(Perseveranca_MEJ_Model, id=ficha_id)
+        ficha.ficha_assinada = True
+        ficha.save()
+    return redirect('core:listar_fichas')
+
 def imprimir_ficha_adulto(request):
     if request.method == 'POST':
         ficha_id = request.POST.get('ficha_id')
@@ -111,4 +135,12 @@ def imprimir_ficha_adulto(request):
         ficha.save()
         pdf_path = gerar_ficha_catequese_adulto(ficha)
         return FileResponse(open(pdf_path, 'rb'), content_type='application/pdf')
+    return redirect('core:listar_fichas')
+
+def assinar_ficha_adulto(request):
+    if request.method == 'POST':
+        ficha_id = request.POST.get('ficha_id')
+        ficha = get_object_or_404(CatequeseAdultoModel, id=ficha_id)
+        ficha.ficha_assinada = True
+        ficha.save()
     return redirect('core:listar_fichas')
