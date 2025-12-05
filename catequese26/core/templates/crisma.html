@@ -32,6 +32,41 @@
                         {{ form.as_p }}
                         {% csrf_token %}
 
+                        <!-- =====================================================
+                                 CAIXA DE ERROS ENTRE O FORM E O BOTÃO
+                        ====================================================== -->
+                        {% if form.non_field_errors or form.errors %}
+                        <div class="error-box">
+
+                            <!-- Erros Gerais (non-field errors) -->
+                            {% if form.non_field_errors %}
+                                <h6 class="text-danger fw-bold">Erros:</h6>
+                                <ul>
+                                    {% for error in form.non_field_errors %}
+                                        <li class="text-danger">{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                                <hr>
+                            {% endif %}
+
+                            <!-- Erros por campo -->
+                            {% if form.errors %}
+                                <h6 class="text-danger fw-bold">Verifique os campos:</h6>
+                                <ul>
+                                    {% for field in form %}
+                                        {% for error in field.errors %}
+                                            <li class="text-danger">
+                                                <strong>{{ field.label }}:</strong> {{ error }}
+                                            </li>
+                                        {% endfor %}
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+
+                        </div>
+                        {% endif %}
+                        <!-- ===================== fim caixa de erros ===================== -->                        
+
                         <button type="submit" class="btn btn-primary w-100 mt-3">Enviar Pré-Cadastro</button>
                     </form>
                 </div>

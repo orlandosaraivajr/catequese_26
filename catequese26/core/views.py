@@ -1,8 +1,12 @@
 from django.http import FileResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import CatequeseInfantilForm, CrismaForm
-from .models import CatequeseInfantilModel, CrismaModel
-from .services import gerar_ficha_catequese, gerar_ficha_crisma
+from .forms import CatequeseInfantilForm, CrismaForm, PerseverancaMejForm, CatequeseAdultoForm
+from .models import CatequeseInfantilModel, CrismaModel, Perseveranca_MEJ_Model, CatequeseAdultoModel
+from .services import gerar_ficha_catequese, gerar_ficha_crisma, gerar_ficha_perseveranca_mej, gerar_ficha_catequese_adulto
+
+
+def index(request):
+    return render(request, 'index.html')
 
 def catequese_infantil(request):
     if request.method == 'POST':
@@ -24,22 +28,48 @@ def crisma(request):
         form = CrismaForm()
     return render(request, 'crisma.html', {'form': form})
 
+def perseveranca_mej(request):
+    if request.method == 'POST':
+        form = PerseverancaMejForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('core:procure_secretaria')
+    else:
+        form = PerseverancaMejForm()
+    return render(request, 'perseveranca.html', {'form': form})
+
+def catequese_adulto(request):
+    if request.method == 'POST':
+        form = CatequeseAdultoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('core:procure_secretaria')
+    else:
+        form = CatequeseAdultoForm()
+    return render(request, 'catequese_adulto.html', {'form': form})
+
 def procure_secretaria(request):
     return render(request, 'procure_secretaria.html')
 
 def listar_fichas(request):
     fichas = CatequeseInfantilModel.objects.filter(ficha_impressa=False).order_by('nome')
     fichasCrisma = CrismaModel.objects.filter(ficha_impressa=False).order_by('nome')
+    fichasMEJ = Perseveranca_MEJ_Model.objects.filter(ficha_impressa=False).order_by('nome')
+    fichasAdultos = CatequeseAdultoModel.objects.filter(ficha_impressa=False).order_by('nome')
     mensagem = 'Fichas Pendentes de Impressão'
     contexto = {'fichas': fichas,'fichasCrisma': fichasCrisma, 
+                'fichasMEJ': fichasMEJ,'fichasAdultos': fichasAdultos,
                 'mensagem': mensagem}
     return render(request, 'listar_fichas.html', contexto)
 
 def listar_todas_fichas(request):
     fichas = CatequeseInfantilModel.objects.all().order_by('nome')
     fichasCrisma = CrismaModel.objects.all().order_by('nome')
-    mensagem = 'Todas as Fichas de Inscrição'
+    fichasMEJ = Perseveranca_MEJ_Model.objects.all().order_by('nome')
+    fichasAdultos = CatequeseAdultoModel.objects.all().order_by('nome')
+    mensagem = 'Fichas Pendentes de Impressão'
     contexto = {'fichas': fichas,'fichasCrisma': fichasCrisma, 
+                'fichasMEJ': fichasMEJ,'fichasAdultos': fichasAdultos,
                 'mensagem': mensagem}
     return render(request, 'listar_fichas.html', contexto)
 
@@ -60,5 +90,25 @@ def imprimir_ficha_crisma(request):
         ficha.ficha_impressa = True
         ficha.save()
         pdf_path = gerar_ficha_crisma(ficha)
+        return FileResponse(open(pdf_path, 'rb'), content_type='application/pdf')
+    return redirect('core:listar_fichas')
+
+def imprimir_ficha_perseveranca_mej(request):
+    if request.method == 'POST':
+        ficha_id = request.POST.get('ficha_id')
+        ficha = get_object_or_404(Perseveranca_MEJ_Model, id=ficha_id)
+        ficha.ficha_impressa = True
+        ficha.save()
+        pdf_path = gerar_ficha_perseveranca_mej(ficha)
+        return FileResponse(open(pdf_path, 'rb'), content_type='application/pdf')
+    return redirect('core:listar_fichas')
+
+def imprimir_ficha_adulto(request):
+    if request.method == 'POST':
+        ficha_id = request.POST.get('ficha_id')
+        ficha = get_object_or_404(CatequeseAdultoModel, id=ficha_id)
+        ficha.ficha_impressa = True
+        ficha.save()
+        pdf_path = gerar_ficha_catequese_adulto(ficha)
         return FileResponse(open(pdf_path, 'rb'), content_type='application/pdf')
     return redirect('core:listar_fichas')

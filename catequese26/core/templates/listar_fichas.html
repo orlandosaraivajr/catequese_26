@@ -70,7 +70,7 @@
         </div>
     {% else %}
         <div class="alert alert-info text-center">
-            Nenhuma ficha pendente de impressão.
+            Nenhuma ficha Catequese Infantil pendente de impressão.
         </div>
     {% endif %}
 <br>
@@ -120,9 +120,112 @@
         </div>
     {% else %}
         <div class="alert alert-info text-center">
-            Nenhuma ficha pendente de impressão.
+            Nenhuma ficha Crisma pendente de impressão.
         </div>
     {% endif %}
+
+<br>
+    {% if fichasMEJ %}
+        <div class="card shadow-sm">
+            <div class="card-body">
+
+                <table class="table table-hover align-middle">
+                    <thead style="background-color: #b30000; color: white;">
+                        <tr>
+                            <th>Perseverança / MEJ</th>
+                        </tr>
+                        <tr>
+                            <th>Nome</th>
+                            <th style="width: 150px;">Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ficha in fichasMEJ %}
+                        <tr>
+                            <td>{{ ficha.nome }}</td>
+                            <td>
+                                <form method="POST" action="{% url 'core:imprimir_ficha_perseveranca_mej' %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="ficha_id" value="{{ ficha.id }}">
+
+                                    {% if ficha.ficha_impressa %}
+                                            <!-- Ficha já impressa → botão padrão -->
+                                            <button class="btn btn-warning btn-sm" type="submit">
+                                                Reimprimir
+                                            </button>
+                                            
+                                        {% else %}
+                                            <!-- Ficha ainda não impressa → botão amarelo e texto Reimprimir -->
+                                            <button class="btn btn-primary btn-sm" type="submit">
+                                                Imprimir
+                                            </button>
+                                        {% endif %}
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    {% else %}
+        <div class="alert alert-info text-center">
+            Nenhuma ficha Perseverança / MEJ pendente de impressão.
+        </div>
+    {% endif %}
+
+<br>
+    {% if fichasAdultos %}
+        <div class="card shadow-sm">
+            <div class="card-body">
+
+                <table class="table table-hover align-middle">
+                    <thead style="background-color: #b30000; color: white;">
+                        <tr>
+                            <th>Catequese Adultos</th>
+                        </tr>
+                        <tr>
+                            <th>Nome</th>
+                            <th style="width: 150px;">Ação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ficha in fichasAdultos %}
+                        <tr>
+                            <td>{{ ficha.nome }}</td>
+                            <td>
+                                <form method="POST" action="{% url 'core:imprimir_ficha_adulto' %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="ficha_id" value="{{ ficha.id }}">
+
+                                    {% if ficha.ficha_impressa %}
+                                            <!-- Ficha já impressa → botão padrão -->
+                                            <button class="btn btn-warning btn-sm" type="submit">
+                                                Reimprimir
+                                            </button>
+                                            
+                                        {% else %}
+                                            <!-- Ficha ainda não impressa → botão amarelo e texto Reimprimir -->
+                                            <button class="btn btn-primary btn-sm" type="submit">
+                                                Imprimir
+                                            </button>
+                                        {% endif %}
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    {% else %}
+        <div class="alert alert-info text-center">
+            Nenhuma ficha catequese Adulto pendente de impressão.
+        </div>
+    {% endif %}
+
 
     <div class="text-center mt-4">
         <a href="{% url 'core:listar_fichas' %}" class="btn btn-secondary">
