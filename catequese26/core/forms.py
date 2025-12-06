@@ -7,7 +7,7 @@ class CatequeseInfantilForm(ModelForm):
     class Meta:
         model = CatequeseInfantilModel
         fields = '__all__'
-        exclude = ['ficha_impressa', 'ficha_assinada']
+        exclude = ['ficha_impressa', 'ficha_assinada','criado_em','modificado_em']
 
         labels = {
             'nome': 'Nome Completo:',
@@ -162,7 +162,7 @@ class CrismaForm(ModelForm):
     class Meta:
         model = CrismaModel
         fields = '__all__'
-        exclude = ['ficha_impressa', 'ficha_assinada']
+        exclude = ['ficha_impressa', 'ficha_assinada','criado_em','modificado_em']
 
         labels = {
 
@@ -287,7 +287,7 @@ class PerseverancaMejForm(ModelForm):
     class Meta:
         model = Perseveranca_MEJ_Model
         fields = '__all__'
-        exclude = ['ficha_impressa', 'ficha_assinada']
+        exclude = ['ficha_impressa', 'ficha_assinada','criado_em','modificado_em']
 
         labels = {
             'nome': 'Nome Completo:',
@@ -445,7 +445,7 @@ class CatequeseAdultoForm(forms.ModelForm):
     class Meta:
         model = CatequeseAdultoModel
         fields = '__all__'
-        exclude = ['ficha_impressa', 'ficha_assinada']
+        exclude = ['ficha_impressa', 'ficha_assinada','criado_em','modificado_em']
 
         labels = {
             'nome': 'Nome Completo:',

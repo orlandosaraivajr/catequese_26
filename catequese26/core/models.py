@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 class CatequeseInfantilModel(models.Model):
     SEXO_CHOICES = (
@@ -66,6 +67,8 @@ class CatequeseInfantilModel(models.Model):
     ficha_impressa = models.BooleanField(default=False)
     ficha_assinada = models.BooleanField(default=False)
 
+    criado_em = models.DateTimeField(default=timezone.now)
+
     def __str__(self):
         return self.nome
 
@@ -123,6 +126,8 @@ class CrismaModel(models.Model):
     ficha_impressa = models.BooleanField(default=False)
     ficha_assinada = models.BooleanField(default=False)
     
+    criado_em = models.DateTimeField(default=timezone.now)
+
     def __str__(self):
         return self.nome
 
@@ -190,6 +195,8 @@ class Perseveranca_MEJ_Model(models.Model):
     ficha_impressa = models.BooleanField(default=False)
     ficha_assinada = models.BooleanField(default=False)
 
+    criado_em = models.DateTimeField(default=timezone.now)
+    
     def __str__(self):
         return self.nome
 
@@ -245,6 +252,8 @@ class CatequeseAdultoModel(models.Model):
     # Ficha Impressa
     ficha_impressa = models.BooleanField(default=False)
     ficha_assinada = models.BooleanField(default=False)
-    
+
+    criado_em = models.DateTimeField(default=timezone.now)
+
     def __str__(self):
         return self.nome
