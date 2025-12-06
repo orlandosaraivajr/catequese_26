@@ -35,7 +35,7 @@ class ListarTodasFichasGetTest(TestCase):
 
     def test_contexto_tem_mensagem(self):
         self.assertIn("mensagem", self.resp.context)
-        self.assertEqual(self.resp.context["mensagem"], "Todas as Fichas de Inscrição")
+        self.assertEqual(self.resp.context["mensagem"], "Fichas Pendentes de Impressão")
 
     def test_contexto_tem_fichas(self):
         self.assertIn("fichas", self.resp.context)
