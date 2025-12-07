@@ -312,6 +312,64 @@ def gerar_ficha_catequese(ficha):
     )
     frame = Frame(250, height - 940, 500, 200)
     frame.addFromList([paragrafo], c)
+
+    c.showPage()  # Página 3 
+    
+    c.drawImage(
+        img_path,
+        x=50,           # posição X
+        y=height - 140, # posição Y (200px de altura da imagem)
+        width=500,      # ajuste como preferir
+        height=150,
+        preserveAspectRatio=True,
+        mask='auto'
+    )
+    c.setFont("Helvetica-Bold", 13)
+    c.drawString(100, height - 160, f"AUTORIZAÇÃO PARA USO DE IMAGEM MENORES DE 18 ANOS")
+    
+    styles = getSampleStyleSheet()
+    style = styles["Normal"]
+    style.fontName = "Helvetica"
+    style.fontSize = 11
+    style.leading = 15
+
+    paragrafo = Paragraph(
+        f"Eu, {ficha.nome_responsavel}, CPF {ficha.cpf_responsavel} na qualidade de responsável legal pelo(a) menor "
+        f"{ficha.nome}, autorizo, de forma livre, expressa e informada, a Paróquia Nossa Senhora Aparecida, inscrita "
+        f"no CNPJ sob o nº 44.802.999/0011-30, a utilizar a imagem, nome e voz do(a) menor, captados em fotografias e/ou vídeos durante atividades e eventos da paróquia, para fins de divulgação em meios impressos, digitais e redes sociais da paróquia, sem qualquer ônus."
+        ,style
+    )
+    frame = Frame(50, height - 400, 500, 200)
+    frame.addFromList([paragrafo], c)
+
+    paragrafo = Paragraph(
+        f"Declaro estar ciente de que a utilização da imagem do(a) menor será feita de acordo com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018 - LGPD), e que posso, a qualquer momento, revogar esta autorização mediante solicitação por escrito à paróquia. "
+        ,style
+    )
+    frame = Frame(50, height - 480, 500, 200)
+    frame.addFromList([paragrafo], c)
+
+    paragrafo = Paragraph(
+        f"Estou ciente de que não tenho direito a qualquer remuneração pelo uso da imagem, nome e voz do(a) menor nos termos acima mencionados, e que a presente autorização é concedida por prazo indeterminado, podendo ser revogada a qualquer momento, mediante comunicação por escrito. "
+        ,style
+    )
+    frame = Frame(50, height - 530, 500, 200)
+    frame.addFromList([paragrafo], c)
+    
+    paragrafo = Paragraph(
+        f"Por fim, declaro que a presente autorização foi feita de forma livre, sem qualquer coação, e que fui devidamente informado(a) sobre o tratamento dos dados pessoais do(a) menor pela paróquia. "
+        ,style
+    )
+    frame = Frame(50, height - 580, 500, 200)
+    frame.addFromList([paragrafo], c)
+
+    paragrafo = Paragraph(
+            f"Rio Claro, {data_hoje()}<br/><br/> _____________________________________________<br/> {ficha.nome_responsavel} - CPF: {ficha.cpf_responsavel}",
+        style
+    )
+    frame = Frame(250, height - 660, 500, 200)
+    frame.addFromList([paragrafo], c)
+    
     c.save()
 
     return filename
@@ -510,6 +568,65 @@ def gerar_ficha_crisma(ficha):
     )
     frame = Frame(250, height - 940, 500, 200)
     frame.addFromList([paragrafo], c)
+    
+    c.showPage()  # Página 3 
+    
+    c.drawImage(
+        img_path,
+        x=50,           # posição X
+        y=height - 140, # posição Y (200px de altura da imagem)
+        width=500,      # ajuste como preferir
+        height=150,
+        preserveAspectRatio=True,
+        mask='auto'
+    )
+    c.setFont("Helvetica-Bold", 13)
+    c.drawString(100, height - 160, f"AUTORIZAÇÃO PARA USO DE IMAGEM MENORES DE 18 ANOS")
+    
+    styles = getSampleStyleSheet()
+    style = styles["Normal"]
+    style.fontName = "Helvetica"
+    style.fontSize = 11
+    style.leading = 15
+
+    paragrafo = Paragraph(
+        f"Eu, {ficha.nome_responsavel}, CPF {ficha.cpf_responsavel} na qualidade de responsável legal pelo(a) menor "
+        f"{ficha.nome}, autorizo, de forma livre, expressa e informada, a Paróquia Nossa Senhora Aparecida, inscrita "
+        f"no CNPJ sob o nº 44.802.999/0011-30, a utilizar a imagem, nome e voz do(a) menor, captados em fotografias e/ou vídeos durante atividades e eventos da paróquia, para fins de divulgação em meios impressos, digitais e redes sociais da paróquia, sem qualquer ônus."
+        ,style
+    )
+    frame = Frame(50, height - 400, 500, 200)
+    frame.addFromList([paragrafo], c)
+
+    paragrafo = Paragraph(
+        f"Declaro estar ciente de que a utilização da imagem do(a) menor será feita de acordo com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018 - LGPD), e que posso, a qualquer momento, revogar esta autorização mediante solicitação por escrito à paróquia. "
+        ,style
+    )
+    frame = Frame(50, height - 480, 500, 200)
+    frame.addFromList([paragrafo], c)
+
+    paragrafo = Paragraph(
+        f"Estou ciente de que não tenho direito a qualquer remuneração pelo uso da imagem, nome e voz do(a) menor nos termos acima mencionados, e que a presente autorização é concedida por prazo indeterminado, podendo ser revogada a qualquer momento, mediante comunicação por escrito. "
+        ,style
+    )
+    frame = Frame(50, height - 530, 500, 200)
+    frame.addFromList([paragrafo], c)
+    
+    paragrafo = Paragraph(
+        f"Por fim, declaro que a presente autorização foi feita de forma livre, sem qualquer coação, e que fui devidamente informado(a) sobre o tratamento dos dados pessoais do(a) menor pela paróquia. "
+        ,style
+    )
+    frame = Frame(50, height - 580, 500, 200)
+    frame.addFromList([paragrafo], c)
+
+    paragrafo = Paragraph(
+            f"Rio Claro, {data_hoje()}<br/><br/> _____________________________________________<br/> {ficha.nome_responsavel} - CPF: {ficha.cpf_responsavel}",
+        style
+    )
+    frame = Frame(250, height - 660, 500, 200)
+    frame.addFromList([paragrafo], c)
+    
+    
     c.save()
 
     return filename
@@ -823,6 +940,64 @@ def gerar_ficha_perseveranca_mej(ficha):
     )
     frame = Frame(250, height - 940, 500, 200)
     frame.addFromList([paragrafo], c)
+    
+    c.showPage()  # Página 3 
+    
+    c.drawImage(
+        img_path,
+        x=50,           # posição X
+        y=height - 140, # posição Y (200px de altura da imagem)
+        width=500,      # ajuste como preferir
+        height=150,
+        preserveAspectRatio=True,
+        mask='auto'
+    )
+    c.setFont("Helvetica-Bold", 13)
+    c.drawString(100, height - 160, f"AUTORIZAÇÃO PARA USO DE IMAGEM MENORES DE 18 ANOS")
+    
+    styles = getSampleStyleSheet()
+    style = styles["Normal"]
+    style.fontName = "Helvetica"
+    style.fontSize = 11
+    style.leading = 15
+
+    paragrafo = Paragraph(
+        f"Eu, {ficha.nome_responsavel}, CPF {ficha.cpf_responsavel} na qualidade de responsável legal pelo(a) menor "
+        f"{ficha.nome}, autorizo, de forma livre, expressa e informada, a Paróquia Nossa Senhora Aparecida, inscrita "
+        f"no CNPJ sob o nº 44.802.999/0011-30, a utilizar a imagem, nome e voz do(a) menor, captados em fotografias e/ou vídeos durante atividades e eventos da paróquia, para fins de divulgação em meios impressos, digitais e redes sociais da paróquia, sem qualquer ônus."
+        ,style
+    )
+    frame = Frame(50, height - 400, 500, 200)
+    frame.addFromList([paragrafo], c)
+
+    paragrafo = Paragraph(
+        f"Declaro estar ciente de que a utilização da imagem do(a) menor será feita de acordo com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018 - LGPD), e que posso, a qualquer momento, revogar esta autorização mediante solicitação por escrito à paróquia. "
+        ,style
+    )
+    frame = Frame(50, height - 480, 500, 200)
+    frame.addFromList([paragrafo], c)
+
+    paragrafo = Paragraph(
+        f"Estou ciente de que não tenho direito a qualquer remuneração pelo uso da imagem, nome e voz do(a) menor nos termos acima mencionados, e que a presente autorização é concedida por prazo indeterminado, podendo ser revogada a qualquer momento, mediante comunicação por escrito. "
+        ,style
+    )
+    frame = Frame(50, height - 530, 500, 200)
+    frame.addFromList([paragrafo], c)
+    
+    paragrafo = Paragraph(
+        f"Por fim, declaro que a presente autorização foi feita de forma livre, sem qualquer coação, e que fui devidamente informado(a) sobre o tratamento dos dados pessoais do(a) menor pela paróquia. "
+        ,style
+    )
+    frame = Frame(50, height - 580, 500, 200)
+    frame.addFromList([paragrafo], c)
+
+    paragrafo = Paragraph(
+            f"Rio Claro, {data_hoje()}<br/><br/> _____________________________________________<br/> {ficha.nome_responsavel} - CPF: {ficha.cpf_responsavel}",
+        style
+    )
+    frame = Frame(250, height - 660, 500, 200)
+    frame.addFromList([paragrafo], c)
+    
     c.save()
 
     return filename
@@ -987,7 +1162,7 @@ def gerar_ficha_catequese_adulto(ficha):
     frame.addFromList([paragrafo], c)
     
     paragrafo = Paragraph(
-        f"2) Os dados pessoais do(a) menor serão utilizados exclusivamente para:<br/>"
+        f"2) Meus dados serão utilizados exclusivamente para:<br/>"
         f"    I) Inscrição e organização da Catequese;<br/>"
         f"    II) Emitir certificados de conclusão dos sacramentos;<br/>"
         f"    III) Permitir contato com pais e/ou responsáveis.<br/>"
@@ -1017,8 +1192,8 @@ def gerar_ficha_catequese_adulto(ficha):
     frame.addFromList([paragrafo], c)
     
     paragrafo = Paragraph(
-        f"5) Os dados serão mantidos enquanto o(a) menor estiver matriculado(a) na Catequese, pelo prazo máximo de 3 (três) anos, quando concluída as etapas sacramentais, respeitando-se a necessidade de registros paroquiais.<br/>"
-        f"6) Estou ciente de que posso, a qualquer momento solicitar acesso aos dados pessoais do(a) menor; solicitar correção de dados incompletos, inexatos ou desatualizados; requerer a eliminação de dados desnecessários, excessivos ou tratados em desconformidade com a lei.<br/>"
+        f"5) Os dados serão mantidos enquanto estiver matriculado(a) na Catequese, pelo prazo máximo de 3 (três) anos, quando concluída as etapas sacramentais, respeitando-se a necessidade de registros paroquiais.<br/>"
+        f"6) Estou ciente de que posso, a qualquer momento solicitar acesso aos meus dados pessoais; solicitar correção de dados incompletos, inexatos ou desatualizados; requerer a eliminação de dados desnecessários, excessivos ou tratados em desconformidade com a lei.<br/>"
         f"7) Declaro, ainda, estar ciente de que posso revogar este consentimento a qualquer momento, mediante solicitação formal e por escrito à Secretaria Paroquial.<br/>"
         ,style
     )
@@ -1031,6 +1206,66 @@ def gerar_ficha_catequese_adulto(ficha):
     )
     frame = Frame(250, height - 940, 500, 200)
     frame.addFromList([paragrafo], c)
+    
+    c.showPage()  # Página 3 
+    
+    c.drawImage(
+        img_path,
+        x=50,           # posição X
+        y=height - 140, # posição Y (200px de altura da imagem)
+        width=500,      # ajuste como preferir
+        height=150,
+        preserveAspectRatio=True,
+        mask='auto'
+    )
+    c.setFont("Helvetica-Bold", 13)
+    c.drawString(160, height - 160, f"AUTORIZAÇÃO PARA USO DE IMAGEM")
+    
+    styles = getSampleStyleSheet()
+    style = styles["Normal"]
+    style.fontName = "Helvetica"
+    style.fontSize = 11
+    style.leading = 15
+
+    paragrafo = Paragraph(
+        f"Eu, {ficha.nome}, CPF {ficha.cpf} "
+        f", autorizo, de forma livre, expressa e informada, a Paróquia Nossa Senhora Aparecida, inscrita "
+        f"no CNPJ sob o nº 44.802.999/0011-30, a utilizar a minha imagem, nome e voz, captados em fotografias e/ou vídeos durante atividades e eventos da paróquia, para fins de divulgação em meios impressos, digitais e redes sociais da paróquia, sem qualquer ônus."
+        ,style
+    )
+    frame = Frame(50, height - 400, 500, 200)
+    frame.addFromList([paragrafo], c)
+
+    paragrafo = Paragraph(
+        f"Declaro estar ciente de que a utilização da minha imagem será feita de acordo com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018 - LGPD), e que posso, a qualquer momento, revogar esta autorização mediante solicitação por escrito à paróquia. "
+        ,style
+    )
+    frame = Frame(50, height - 480, 500, 200)
+    frame.addFromList([paragrafo], c)
+
+    paragrafo = Paragraph(
+        f"Estou ciente de que não tenho direito a qualquer remuneração pelo uso da minha imagem, nome e voz nos termos acima mencionados, e que a presente autorização é concedida por prazo indeterminado, podendo ser revogada a qualquer momento, mediante comunicação por escrito. "
+        ,style
+    )
+    frame = Frame(50, height - 530, 500, 200)
+    frame.addFromList([paragrafo], c)
+    
+    paragrafo = Paragraph(
+        f"Por fim, declaro que a presente autorização foi feita de forma livre, sem qualquer coação, e que fui devidamente informado(a) sobre o tratamento dos dados pessoais do(a) menor pela paróquia. "
+        ,style
+    )
+    frame = Frame(50, height - 580, 500, 200)
+    frame.addFromList([paragrafo], c)
+
+    paragrafo = Paragraph(
+            f"Rio Claro, {data_hoje()}<br/><br/> _____________________________________________<br/> {ficha.nome} - CPF: {ficha.cpf}",
+        style
+    )
+    frame = Frame(250, height - 660, 500, 200)
+    frame.addFromList([paragrafo], c)
+    
+    
     c.save()
 
     return filename
+
