@@ -2,6 +2,7 @@ from django.test import TestCase, Client
 from django.shortcuts import resolve_url as r
 from http import HTTPStatus
 from core.models import CatequeseInfantilModel 
+from datetime import date
 
 class CatequeseInfantilGetTest(TestCase):
     def setUp(self):
@@ -21,10 +22,11 @@ class CatequeseInfantilGetTest(TestCase):
 class CatequeseInfantilPostSuccessTest(TestCase):
     def setUp(self):
         self.client = Client()
+        ano_nascimento = date.today().year - 7  # 7 anos
         self.valid_data = {
     'nome': 'João da Silva',
     'sexo': 'M',                       # 'M' ou 'F'
-    'data_nascimento': '2015-10-20',   # YYYY-MM-DD
+    'data_nascimento': f'{ano_nascimento}-10-20',
     'naturalidade': 'Araras',
 
     'nome_pai': 'Carlos da Silva',

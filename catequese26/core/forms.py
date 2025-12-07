@@ -138,6 +138,37 @@ class CatequeseInfantilForm(ModelForm):
             raise forms.ValidationError("Erro: Digite o nome completo da mãe.")
         return nome
 
+    def clean_data_nascimento(self):
+        data_nascimento = self.cleaned_data.get('data_nascimento')
+        if not data_nascimento:
+            raise forms.ValidationError("Informe a data de nascimento.")
+        return data_nascimento
+
+    def clean_horario(self):
+        horario = self.cleaned_data.get('horario')
+        if not horario:
+            raise forms.ValidationError("Selecione um horário para a catequese.")
+        ano_nascimento = self.cleaned_data.get('data_nascimento').year
+        from datetime import date
+        # Verificar estrutura HORARIO_CATEQUESE no modelo CatequeseInfantilModel
+        pre_catequese = ['1','2','3','4']
+        catequese = ['5','6','7','8','9']
+        doze_mais = ['10','11']
+        ano_base = date.today().year + 1
+        idade_projetada = ano_base - ano_nascimento
+        if idade_projetada >= 6 and idade_projetada <= 8:
+            if horario not in pre_catequese:
+                raise forms.ValidationError("Pelo ano de nascimento, escolha um horário de pré-catequese.")
+        if idade_projetada >= 9 and idade_projetada <= 11:
+            if horario not in catequese:
+                raise forms.ValidationError("Pelo ano de nascimento, escolha um horário de catequese.")
+        if idade_projetada >= 12 and idade_projetada <= 14:
+            if horario not in doze_mais:
+                raise forms.ValidationError("Pelo ano de nascimento, escolha um horário de catequese 12+.")
+        if idade_projetada >= 13:
+            raise forms.ValidationError("Pelo ano de nascimento, escolha a ficha catequese de adulto.")
+        return horario
+
     def clean(self):
         cleaned_data = super().clean()
         batizado = cleaned_data.get('batizado')
