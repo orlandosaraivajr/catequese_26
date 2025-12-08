@@ -139,7 +139,7 @@ class Perseveranca_MEJ_Model(models.Model):
     )
     
     HORARIO_PERSEVERANCA = (
-        ("1", "Perseverança - 11 a 14 anos - Quinta às 19:30h"),
+        ("1", "Perseverança e MEJ - 11 a 14 anos - Quinta às 19:30h"),
         ("2", "MEJ - 15 a 25 anos - Quinta às 19:30h"),
     )
 
