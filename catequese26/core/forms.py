@@ -1,5 +1,6 @@
 from django import forms
 from django.forms import ModelForm
+from datetime import date
 from .models import CatequeseInfantilModel, CrismaModel, Perseveranca_MEJ_Model, CatequeseAdultoModel
 
 
@@ -149,7 +150,6 @@ class CatequeseInfantilForm(ModelForm):
         if not horario:
             raise forms.ValidationError("Selecione um horário para a catequese.")
         ano_nascimento = self.cleaned_data.get('data_nascimento').year
-        from datetime import date
         # Verificar estrutura HORARIO_CATEQUESE no modelo CatequeseInfantilModel
         pre_catequese = ['1','2','3','4']
         catequese = ['5','6','7','8','9']
@@ -285,6 +285,19 @@ class CrismaForm(ModelForm):
             'cidade': {'required': 'Informe a cidade.'},
             'uf': {'required': 'Informe o estado (UF).'},
         }
+
+    def clean_data_nascimento(self):
+        data_nascimento = self.cleaned_data.get('data_nascimento')
+        if not data_nascimento:
+            raise forms.ValidationError("Informe a data de nascimento.")
+        ano_nascimento = self.cleaned_data.get('data_nascimento').year
+        ano_base = date.today().year + 1
+        idade_projetada = ano_base - ano_nascimento
+        if idade_projetada < 15:
+            raise forms.ValidationError("Necessário 15 anos para pré-matrícula na Crisma.")
+        if idade_projetada > 20:
+            raise forms.ValidationError("Acima de 20 anos, inscrever-se na Catequese de Adulto.")
+        return data_nascimento
 
     def clean(self):
         cleaned_data = super().clean()
