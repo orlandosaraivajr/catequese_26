@@ -230,6 +230,10 @@ class CrismaForm(ModelForm):
 
             'padrinho_nome': 'Nome do Padrinho/Madrinha:',
             'padrinho_celular': 'Celular do Padrinho/Madrinha:',
+
+            'nome_responsavel': 'Nome do Responsável (para direito de imagem):',
+            'cpf_responsavel': 'CPF do Responsável:',
+            'endereco_responsavel': 'Endereço do Responsável:',
         }
 
         widgets = {
@@ -362,6 +366,10 @@ class PerseverancaMejForm(ModelForm):
             'primeira_eucaristia_diocese': 'Diocese da Primeira Eucaristia:',
             'primeira_eucaristia_paroquia': 'Paróquia da Primeira Eucaristia:',
             'primeira_eucaristia_celebrante': 'Celebrante da Primeira Eucaristia:',
+
+            'nome_responsavel': 'Nome do Responsável (para direito de imagem):',
+            'cpf_responsavel': 'CPF do Responsável:',
+            'endereco_responsavel': 'Endereço do Responsável:',
         }
 
         widgets = {
