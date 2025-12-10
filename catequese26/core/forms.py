@@ -526,7 +526,7 @@ class CatequeseAdultoForm(forms.ModelForm):
     class Meta:
         model = CatequeseAdultoModel
         fields = '__all__'
-        exclude = ['ficha_impressa', 'ficha_assinada','criado_em','modificado_em']
+        exclude = ['ficha_impressa', 'ficha_assinada','criado_em','modificado_em','padrinho_nome','padrinho_celular']
 
         labels = {
             'nome': 'Nome Completo:',
