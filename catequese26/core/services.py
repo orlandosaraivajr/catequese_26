@@ -1704,43 +1704,59 @@ def gerar_ficha_catequese_adulto(ficha):
     c.setFont("Helvetica", 11)
     c.drawString(150, height - 355, f"{ficha.cidade}  -  {ficha.uf}")
     
+    c.setFont("Helvetica-Bold", 11)
+    c.drawString(50, height - 370, f"Estado Civil:")
+    c.setFont("Helvetica", 11)
+    c.drawString(150, height - 370, f"{ficha.estado_civil}")
+    
     # Batizado
     c.setFont("Helvetica", 11)
     if ficha.batizado:
         c.setFont("Helvetica-Bold", 11)
-        c.drawString(50, height - 375, f"Batizado na Data: {ficha.batizado_data.strftime("%d/%m/%Y") if ficha.batizado_data else ''}")
+        c.drawString(50, height - 400, f"Batizado na Data: {ficha.batizado_data.strftime("%d/%m/%Y") if ficha.batizado_data else ''}")
         c.setFont("Helvetica", 11)
-        c.drawString(50, height - 385, f"Diocese: {ficha.batizado_diocese} Celebrante: {ficha.batizado_celebrante}  Paróquia: {ficha.batizado_paroquia}")
+        c.drawString(50, height - 415, f"Diocese: {ficha.batizado_diocese}")
+        c.drawString(50, height - 430, f"Celebrante: {ficha.batizado_celebrante}")
+        c.drawString(50, height - 445, f"Paróquia: {ficha.batizado_paroquia}")
     else:
         c.setFillColor(colors.red)
         c.setFont("Helvetica-Bold", 11)
-        c.drawString(50, height - 375, f"Não Batizado")
+        c.drawString(50, height - 400, f"Não Batizado")
         c.setFillColor(colors.black)
 
 # Primeira Eucaristia
     if ficha.primeira_eucaristia:
         c.setFont("Helvetica-Bold", 11)
-        c.drawString(50, height - 400, f"Primeira Eucaristia - Data: {ficha.primeira_eucaristia_data.strftime("%d/%m/%Y") if ficha.primeira_eucaristia_data else ''}")
+        c.drawString(50, height - 500, f"Primeira Eucaristia - Data: {ficha.primeira_eucaristia_data.strftime("%d/%m/%Y") if ficha.primeira_eucaristia_data else ''}")
         c.setFont("Helvetica", 11)
-        c.drawString(50, height - 410, f"Diocese: {ficha.primeira_eucaristia_diocese}   Paróquia: {ficha.primeira_eucaristia_paroquia} - Celebrante: {ficha.primeira_eucaristia_celebrante} ")
+        c.drawString(50, height - 515, f"Diocese: {ficha.primeira_eucaristia_diocese}")
+        c.drawString(50, height - 530, f"Paróquia: {ficha.primeira_eucaristia_paroquia}")
+        c.drawString(50, height - 545, f"Celebrante: {ficha.primeira_eucaristia_celebrante} ")
     else:
         c.setFillColor(colors.red)
         c.setFont("Helvetica-Bold", 11)
-        c.drawString(50, height - 400, f"Não Fez Primeira Eucaristia")
+        c.drawString(50, height - 500, f"Não Fez Primeira Eucaristia")
         c.setFillColor(colors.black)
 
 
 # Casamento
-    c.setFont("Helvetica", 11)
+    
     if ficha.casado_igreja:
-        c.drawString(50, height - 420, f"Casado na Igreja - Data: {ficha.casado_igreja_data.strftime("%d/%m/%Y") if ficha.casado_igreja_data else ''}")
-        c.drawString(50, height - 430, f"Diocese: {ficha.casado_igreja_diocese}   Paróquia: {ficha.casado_igreja_paroquia} - Celebrante: {ficha.casado_igreja_celebrante} ")
+        c.setFont("Helvetica-Bold", 11)
+        c.drawString(50, height - 600, f"Casado na Igreja - Data: {ficha.casado_igreja_data.strftime("%d/%m/%Y") if ficha.casado_igreja_data else ''}")
+        c.setFont("Helvetica", 11)
+        c.drawString(50, height - 615, f"Diocese: {ficha.casado_igreja_diocese}")
+        c.drawString(50, height - 630, f"Paróquia: {ficha.casado_igreja_paroquia}")
+        c.drawString(50, height - 645, f"Celebrante: {ficha.casado_igreja_celebrante} ")
     else:
-        c.drawString(50, height - 420, f"Não casou na Igreja ")
+        c.setFillColor(colors.red)
+        c.setFont("Helvetica-Bold", 11)
+        c.drawString(50, height - 600, f"Não casou na Igreja ")
+        c.setFillColor(colors.black)
 
     c.setFont("Helvetica", 11)
-    c.drawString(50, height - 440, f"Horário:")
-    c.drawString(150, height - 440, f"{ficha.get_horario_display()}")
+    c.drawString(50, height - 700, f"Horário:")
+    c.drawString(150, height - 700, f"{ficha.get_horario_display()}")
     
    
     styles = getSampleStyleSheet()
