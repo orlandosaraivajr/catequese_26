@@ -228,6 +228,19 @@ class CrismaForm(ModelForm):
 
             'horario': 'Horário da Crisma:',
 
+            'possui_deficiencia': 'Possui Deficiência?',
+            'descricao_deficiencia': 'Descrição da Deficiência:',
+
+            'possui_transtorno': 'Possui Algum Transtorno?',
+            'descricao_transtorno': 'Descrição do Transtorno:',
+
+            'medicamento_uso_continuo': 'Toma Medicamento de Uso Contínuo?',
+            'descricao_medicamento': 'Descrição do Medicamento:',
+            'medicamento_horario': 'Horário do Medicamento:',
+
+            'acompanhamento_psicologico': 'Faz Acompanhamento Psicológico?',
+            'descricao_acompanhamento': 'Descrição do Acompanhamento:',
+
             'padrinho_nome': 'Nome do Padrinho/Madrinha:',
             'padrinho_celular': 'Celular do Padrinho/Madrinha:',
 
@@ -275,6 +288,22 @@ class CrismaForm(ModelForm):
 
             'padrinho_nome': forms.TextInput(attrs={'class': 'form-control'}),
             'padrinho_celular': forms.TextInput(attrs={'class': 'form-control'}),
+
+            # Necessidades especiais
+            'possui_deficiencia': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'descricao_deficiencia': forms.Textarea(attrs={'class': 'form-control', 'rows': 2}),
+
+            'possui_transtorno': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'descricao_transtorno': forms.Textarea(attrs={'class': 'form-control', 'rows': 2}),
+
+            # Medicamentos
+            'medicamento_uso_continuo': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'descricao_medicamento': forms.Textarea(attrs={'class': 'form-control', 'rows': 2}),
+            'medicamento_horario': forms.TextInput(attrs={'class': 'form-control'}),
+
+            # Acompanhamento psicológico
+            'acompanhamento_psicologico': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
+            'descricao_acompanhamento': forms.Textarea(attrs={'class': 'form-control', 'rows': 2}),
             
                # Responsável
             'nome_responsavel': forms.TextInput(attrs={'class': 'form-control'}),

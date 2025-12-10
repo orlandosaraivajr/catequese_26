@@ -479,6 +479,115 @@ def gerar_ficha_crisma_menor(ficha):
     style.fontSize = 11
     style.leading = 15
 
+# Cuidado e Acolhimento da Criança
+    c.setFont("Helvetica-Bold", 16)
+    c.drawString(170, height - 480, "Cuidado e Acolhimento")   
+    c.setFont("Helvetica", 11)
+    
+    styles = getSampleStyleSheet()
+    style = styles["Normal"]
+    style.fontName = "Helvetica"
+    style.fontSize = 11
+    style.leading = 15
+
+    paragrafo = Paragraph(
+        "Para que possamos receber seu filho(a) com todo carinho, atenção e segurança, "
+        "pedimos que compartilhe conosco algumas informações importantes. "
+        "Tudo será tratado com sigilo e usado apenas para ajudar no bem-estar "
+        "do(a) jovem durante as atividades.",
+        style
+    )
+
+    frame = Frame(50, height - 700, 500, 200)  # x, y, largura, altura
+    frame.addFromList([paragrafo], c)
+    
+# 1 Deficiência ou Necessidade Especial
+    paragrafo = Paragraph(
+        "1. Seu filho(a) possui alguma deficiência que devemos conhecer para acolhê-lo(a) "
+        "da melhor forma?",
+        style
+    )
+    frame = Frame(50, height - 750, 500, 200)
+    frame.addFromList([paragrafo], c)
+    if ficha.possui_deficiencia:
+        paragrafo = Paragraph(
+            f"Sim. Descrição: {ficha.descricao_deficiencia}",
+            style
+        )
+    else:
+        paragrafo = Paragraph(
+            "Não.",
+            style
+        )
+    frame = Frame(50, height - 780, 500, 200)
+    frame.addFromList([paragrafo], c)
+
+# 2 Transtornos
+    paragrafo = Paragraph(
+        "2. Há algum transtorno ou diagnóstico que ajude nossa pastoral a compreender melhor as necessidades da criança?",
+        style
+    )
+    frame = Frame(50, height - 795, 500, 200)
+    frame.addFromList([paragrafo], c)    
+    if ficha.possui_transtorno:
+        paragrafo = Paragraph(
+            f"Sim. Descrição: {ficha.descricao_transtorno}",
+            style
+        )
+    else:
+        paragrafo = Paragraph(
+            "Não.",
+            style
+        )
+    frame = Frame(50, height - 825, 500, 200)
+    frame.addFromList([paragrafo], c)
+    
+# 3 Medicamentos
+    paragrafo = Paragraph(
+        "3. Seu filho(a) faz uso de algum medicamento contínuo?",
+        style
+    )
+    frame = Frame(50, height - 840, 500, 200)
+    frame.addFromList([paragrafo], c)    
+    if ficha.medicamento_uso_continuo:
+        paragrafo = Paragraph(
+            f"Sim. Descrição: {ficha.descricao_medicamento}. Horário: {ficha.medicamento_horario}",
+            style
+        )
+    else:
+        paragrafo = Paragraph(
+            "Não.",
+            style
+        )
+    frame = Frame(50, height - 855, 500, 200)
+    frame.addFromList([paragrafo], c)   
+    
+# 4 Acompanhamento Psicológico
+    paragrafo = Paragraph(
+        "4. A criança faz acompanhamento psicológico, psiquiátrico ou terapêutico?",
+        style
+    )
+    frame = Frame(50, height - 870, 500, 200)
+    frame.addFromList([paragrafo], c)    
+    if ficha.acompanhamento_psicologico:
+        paragrafo = Paragraph(
+            f"Sim. Descrição: {ficha.descricao_acompanhamento}",
+            style
+        )
+    else:
+        paragrafo = Paragraph(
+            "Não.",
+            style
+        )
+    frame = Frame(50, height - 885, 500, 200)
+    frame.addFromList([paragrafo], c)
+
+    paragrafo = Paragraph(
+            "Agradecemos de coração pela confiança. Nosso desejo é caminhar juntos para que o(a) jovem viva cada momento com alegria, segurança e acolhimento.",
+        style
+    )
+    frame = Frame(50, height - 900, 500, 200)
+    frame.addFromList([paragrafo], c)
     
     paragrafo = Paragraph(
             f"Rio Claro, {data_hoje()}<br/><br/> _____________________________________________<br/> Assinatura do Responsável",
@@ -735,7 +844,116 @@ def gerar_ficha_crisma_maior(ficha):
     style.fontSize = 11
     style.leading = 15
 
+# Cuidado e Acolhimento da Criança
+    c.setFont("Helvetica-Bold", 16)
+    c.drawString(170, height - 480, "Cuidado e Acolhimento")   
+    c.setFont("Helvetica", 11)
     
+    styles = getSampleStyleSheet()
+    style = styles["Normal"]
+    style.fontName = "Helvetica"
+    style.fontSize = 11
+    style.leading = 15
+
+    paragrafo = Paragraph(
+        "Para que possamos receber você com todo carinho, atenção e segurança, "
+        "pedimos que compartilhe conosco algumas informações importantes. "
+        "Tudo será tratado com sigilo e usado apenas para ajudar no seu bem-estar "
+        "durante as atividades.",
+        style
+    )
+
+    frame = Frame(50, height - 700, 500, 200)  # x, y, largura, altura
+    frame.addFromList([paragrafo], c)
+    
+# 1 Deficiência ou Necessidade Especial
+    paragrafo = Paragraph(
+        "1. Você possui alguma deficiência que devemos conhecer para acolhê-lo(a) "
+        "da melhor forma?",
+        style
+    )
+    frame = Frame(50, height - 750, 500, 200)
+    frame.addFromList([paragrafo], c)
+    if ficha.possui_deficiencia:
+        paragrafo = Paragraph(
+            f"Sim. Descrição: {ficha.descricao_deficiencia}",
+            style
+        )
+    else:
+        paragrafo = Paragraph(
+            "Não.",
+            style
+        )
+    frame = Frame(50, height - 780, 500, 200)
+    frame.addFromList([paragrafo], c)
+
+# 2 Transtornos
+    paragrafo = Paragraph(
+        "2. Há algum transtorno ou diagnóstico que ajude nossa pastoral a compreender melhor as necessidades da criança?",
+        style
+    )
+    frame = Frame(50, height - 795, 500, 200)
+    frame.addFromList([paragrafo], c)    
+    if ficha.possui_transtorno:
+        paragrafo = Paragraph(
+            f"Sim. Descrição: {ficha.descricao_transtorno}",
+            style
+        )
+    else:
+        paragrafo = Paragraph(
+            "Não.",
+            style
+        )
+    frame = Frame(50, height - 825, 500, 200)
+    frame.addFromList([paragrafo], c)
+    
+# 3 Medicamentos
+    paragrafo = Paragraph(
+        "3. Você faz uso de algum medicamento contínuo?",
+        style
+    )
+    frame = Frame(50, height - 840, 500, 200)
+    frame.addFromList([paragrafo], c)    
+    if ficha.medicamento_uso_continuo:
+        paragrafo = Paragraph(
+            f"Sim. Descrição: {ficha.descricao_medicamento}. Horário: {ficha.medicamento_horario}",
+            style
+        )
+    else:
+        paragrafo = Paragraph(
+            "Não.",
+            style
+        )
+    frame = Frame(50, height - 855, 500, 200)
+    frame.addFromList([paragrafo], c)   
+    
+# 4 Acompanhamento Psicológico
+    paragrafo = Paragraph(
+        "4. Você faz acompanhamento psicológico, psiquiátrico ou terapêutico?",
+        style
+    )
+    frame = Frame(50, height - 870, 500, 200)
+    frame.addFromList([paragrafo], c)    
+    if ficha.acompanhamento_psicologico:
+        paragrafo = Paragraph(
+            f"Sim. Descrição: {ficha.descricao_acompanhamento}",
+            style
+        )
+    else:
+        paragrafo = Paragraph(
+            "Não.",
+            style
+        )
+    frame = Frame(50, height - 885, 500, 200)
+    frame.addFromList([paragrafo], c)
+
+    paragrafo = Paragraph(
+            "Agradecemos de coração pela confiança. Nosso desejo é caminhar juntos para que você viva cada momento com alegria, segurança e acolhimento.",
+        style
+    )
+    frame = Frame(50, height - 900, 500, 200)
+    frame.addFromList([paragrafo], c)
+
     paragrafo = Paragraph(
             f"Rio Claro, {data_hoje()}<br/><br/> _____________________________________________<br/> Assinatura do Responsável",
         style

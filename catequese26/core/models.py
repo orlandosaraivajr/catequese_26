@@ -115,7 +115,22 @@ class CrismaModel(models.Model):
 
     padrinho_nome = models.CharField(max_length=150, blank=True, null=True, default='')    
     padrinho_celular = models.CharField(max_length=20, blank=True, null=True, default='')
+
+    # Apoio Especial
+
+    possui_deficiencia = models.BooleanField(default=False)
+    descricao_deficiencia = models.TextField(blank=True, null=True)
     
+    possui_transtorno = models.BooleanField(default=False)
+    descricao_transtorno = models.TextField(blank=True, null=True)
+    
+    medicamento_uso_continuo = models.BooleanField(default=False)
+    descricao_medicamento = models.TextField(blank=True, null=True)
+    medicamento_horario = models.CharField(max_length=100, blank=True, null=True)
+    
+    acompanhamento_psicologico = models.BooleanField(default=False)
+    descricao_acompanhamento = models.TextField(blank=True, null=True)
+
     # Termo de uso de Imagem
     
     nome_responsavel = models.CharField(max_length=150,default='')
