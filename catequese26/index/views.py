@@ -2,3 +2,6 @@ from django.shortcuts import redirect
 
 def index(request):
     return redirect('core:index')
+
+def secretaria(request):
+    return redirect('core:secretaria')
