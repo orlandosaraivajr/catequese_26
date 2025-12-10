@@ -1716,8 +1716,8 @@ def gerar_ficha_catequese_adulto(ficha):
         c.drawString(50, height - 400, f"Batizado na Data: {ficha.batizado_data.strftime("%d/%m/%Y") if ficha.batizado_data else ''}")
         c.setFont("Helvetica", 11)
         c.drawString(50, height - 415, f"Diocese: {ficha.batizado_diocese}")
-        c.drawString(50, height - 430, f"Celebrante: {ficha.batizado_celebrante}")
-        c.drawString(50, height - 445, f"Paróquia: {ficha.batizado_paroquia}")
+        c.drawString(50, height - 430, f"Paróquia: {ficha.batizado_paroquia}")
+        c.drawString(50, height - 445, f"Celebrante: {ficha.batizado_celebrante}")
     else:
         c.setFillColor(colors.red)
         c.setFont("Helvetica-Bold", 11)
