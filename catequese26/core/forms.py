@@ -326,7 +326,7 @@ class CrismaForm(ModelForm):
         ano_nascimento = self.cleaned_data.get('data_nascimento').year
         ano_base = date.today().year + 1
         idade_projetada = ano_base - ano_nascimento
-        if idade_projetada < 15:
+        if idade_projetada < 14:
             raise forms.ValidationError("Necessário 15 anos para pré-matrícula na Crisma.")
         if idade_projetada > 20:
             raise forms.ValidationError("Acima de 20 anos, inscrever-se na Catequese de Adulto.")
