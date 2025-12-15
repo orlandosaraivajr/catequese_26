@@ -165,7 +165,7 @@ class CatequeseInfantilForm(ModelForm):
         if idade_projetada >= 12 and idade_projetada <= 14:
             if horario not in doze_mais:
                 raise forms.ValidationError("Pelo ano de nascimento, escolha um horário de catequese 12+.")
-        if idade_projetada >= 13:
+        if idade_projetada >= 15:
             raise forms.ValidationError("Pelo ano de nascimento, escolha a ficha catequese de adulto.")
         return horario
 
