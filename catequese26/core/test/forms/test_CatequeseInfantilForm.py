@@ -121,11 +121,11 @@ class CatequeseInfantilFormHorarioTests(TestCase):
         self.assertIn("catequese 12+", form.errors.get("horario")[0])
 
     # ------------------------------------------------
-    # Adulto (idade >= 13)
+    # Adulto (idade >= 14)
     # ------------------------------------------------
     def test_horario_adulto(self):
         ano_atual = timezone.now().year + 1
-        ano_nascimento = ano_atual - 14  # idade 14
+        ano_nascimento = ano_atual - 16
         form = self.make_form(
             data_nascimento=datetime.date(ano_nascimento, 1, 1),
             horario='11'

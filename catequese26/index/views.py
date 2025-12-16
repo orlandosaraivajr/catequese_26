@@ -5,3 +5,6 @@ def index(request):
 
 def secretaria(request):
     return redirect('core:secretaria')
+
+def excel(request):
+    return redirect('core:exportar-excel')

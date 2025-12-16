@@ -1,8 +1,10 @@
-from django.http import FileResponse
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.utils.timezone import localtime
+from django.http import HttpResponse, FileResponse
 from .forms import CatequeseInfantilForm, CrismaForm, PerseverancaMejForm, CatequeseAdultoForm
 from .models import CatequeseInfantilModel, CrismaModel, Perseveranca_MEJ_Model, CatequeseAdultoModel
-from .services import gerar_ficha_catequese, gerar_ficha_crisma, gerar_ficha_perseveranca_mej, gerar_ficha_catequese_adulto
+from .services import gerar_ficha_catequese, gerar_ficha_crisma, gerar_ficha_perseveranca_mej, gerar_ficha_catequese_adulto, gerar_Workbook
 
 
 def index(request):
@@ -144,3 +146,14 @@ def assinar_ficha_adulto(request):
         ficha.ficha_assinada = True
         ficha.save()
     return redirect('core:listar_fichas')
+
+@login_required
+def exportar_excel(request):
+    wb = gerar_Workbook()
+    response = HttpResponse(
+        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    )
+    file_name = 'relatorio_catequese_' + localtime().strftime('%d_%m_%Y__%Hh_%Mm')
+    response['Content-Disposition'] = 'attachment; filename=' + file_name + '.xlsx'
+    wb.save(response)
+    return response

@@ -26,4 +26,6 @@ urlpatterns = [
     # Catequese Adulto
     path('imprimir-ficha-adulto', views.imprimir_ficha_adulto, name='imprimir_ficha_adulto'),
     path('assinar-ficha-adulto', views.assinar_ficha_adulto, name='assinar_ficha_adulto'),
+    # Exportar Excel
+    path('excel', views.exportar_excel, name='exportar-excel'),
 ]
