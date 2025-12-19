@@ -71,6 +71,17 @@
                                     </form>
                                 {% endif %}
                             </td>
+                            <td>
+                                {% if ficha.ficha_impressa %}
+                                    <form method="POST" action="{% url 'core:remover_ficha' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="ficha_id" value="{{ ficha.id }}">
+                                            <button class="btn btn-danger btn-sm" type="submit">
+                                                Deletar
+                                            </button>
+                                    </form>
+                                {% endif %}
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -129,6 +140,17 @@
                                         <input type="hidden" name="ficha_id" value="{{ ficha.id }}">
                                             <button class="btn btn-danger btn-sm" type="submit">
                                                 Assinada
+                                            </button>
+                                    </form>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if ficha.ficha_impressa %}
+                                    <form method="POST" action="{% url 'core:remover_ficha_crisma' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="ficha_id" value="{{ ficha.id }}">
+                                            <button class="btn btn-danger btn-sm" type="submit">
+                                                Deletar
                                             </button>
                                     </form>
                                 {% endif %}
@@ -196,6 +218,17 @@
                                     </form>
                                 {% endif %}
                             </td>
+                            <td>
+                                {% if ficha.ficha_impressa %}
+                                    <form method="POST" action="{% url 'core:remover_ficha_perseveranca_mej' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="ficha_id" value="{{ ficha.id }}">
+                                            <button class="btn btn-danger btn-sm" type="submit">
+                                                Deletar
+                                            </button>
+                                    </form>
+                                {% endif %}
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>
@@ -253,6 +286,17 @@
                                         <input type="hidden" name="ficha_id" value="{{ ficha.id }}">
                                             <button class="btn btn-danger btn-sm" type="submit">
                                                 Assinada
+                                            </button>
+                                    </form>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if ficha.ficha_impressa %}
+                                    <form method="POST" action="{% url 'core:remover_ficha_adulto' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="ficha_id" value="{{ ficha.id }}">
+                                            <button class="btn btn-danger btn-sm" type="submit">
+                                                Deletar
                                             </button>
                                     </form>
                                 {% endif %}

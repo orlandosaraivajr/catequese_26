@@ -17,15 +17,20 @@ urlpatterns = [
     # Catequese Infantil
     path('imprimir-ficha', views.imprimir_ficha, name='imprimir_ficha'),
     path('assinar-ficha', views.assinar_ficha, name='assinar_ficha'),
+    path('remover-ficha', views.remover_ficha, name='remover_ficha'),
     # Crisma
     path('imprimir-ficha-crisma', views.imprimir_ficha_crisma, name='imprimir_ficha_crisma'),
     path('assinar-ficha-crisma', views.assinar_ficha_crisma, name='assinar_ficha_crisma'),
+    path('remover-ficha-crisma', views.remover_ficha_crisma, name='remover_ficha_crisma'),
     # Perseverança
     path('imprimir-ficha-perseveranca-mej', views.imprimir_ficha_perseveranca_mej, name='imprimir_ficha_perseveranca_mej'),
     path('assinar-ficha-perseveranca-mej', views.assinar_ficha_perseveranca_mej, name='assinar_ficha_perseveranca_mej'),
+    path('remover-ficha-perseveranca-mej', views.remover_ficha_perseveranca_mej, name='remover_ficha_perseveranca_mej'),
     # Catequese Adulto
     path('imprimir-ficha-adulto', views.imprimir_ficha_adulto, name='imprimir_ficha_adulto'),
     path('assinar-ficha-adulto', views.assinar_ficha_adulto, name='assinar_ficha_adulto'),
+    path('remover-ficha-adulto', views.remover_ficha_adulto, name='remover_ficha_adulto'),
     # Exportar Excel
+    path('total', views.total, name='total'),
     path('excel', views.exportar_excel, name='exportar-excel'),
 ]

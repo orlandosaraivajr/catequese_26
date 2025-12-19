@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.utils.timezone import localtime
 from django.http import HttpResponse, FileResponse
+from django.db.models import Count
 from .forms import CatequeseInfantilForm, CrismaForm, PerseverancaMejForm, CatequeseAdultoForm
 from .models import CatequeseInfantilModel, CrismaModel, Perseveranca_MEJ_Model, CatequeseAdultoModel
 from .services import gerar_ficha_catequese, gerar_ficha_crisma, gerar_ficha_perseveranca_mej, gerar_ficha_catequese_adulto, gerar_Workbook
@@ -93,6 +94,13 @@ def assinar_ficha(request):
         ficha.save()
     return redirect('core:listar_fichas')
 
+def remover_ficha(request):
+    if request.method == 'POST':
+        ficha_id = request.POST.get('ficha_id')
+        ficha = get_object_or_404(CatequeseInfantilModel, id=ficha_id)
+        ficha.delete()
+    return redirect('core:listar_fichas')
+
 def imprimir_ficha_crisma(request):
     if request.method == 'POST':
         ficha_id = request.POST.get('ficha_id')
@@ -109,6 +117,13 @@ def assinar_ficha_crisma(request):
         ficha = get_object_or_404(CrismaModel, id=ficha_id)
         ficha.ficha_assinada = True
         ficha.save()
+    return redirect('core:listar_fichas')
+
+def remover_ficha_crisma(request):
+    if request.method == 'POST':
+        ficha_id = request.POST.get('ficha_id')
+        ficha = get_object_or_404(CrismaModel, id=ficha_id)
+        ficha.delete()
     return redirect('core:listar_fichas')
 
 def imprimir_ficha_perseveranca_mej(request):
@@ -129,6 +144,13 @@ def assinar_ficha_perseveranca_mej(request):
         ficha.save()
     return redirect('core:listar_fichas')
 
+def remover_ficha_perseveranca_mej(request):
+    if request.method == 'POST':
+        ficha_id = request.POST.get('ficha_id')
+        ficha = get_object_or_404(Perseveranca_MEJ_Model, id=ficha_id)
+        ficha.delete()
+    return redirect('core:listar_fichas')
+
 def imprimir_ficha_adulto(request):
     if request.method == 'POST':
         ficha_id = request.POST.get('ficha_id')
@@ -146,6 +168,84 @@ def assinar_ficha_adulto(request):
         ficha.ficha_assinada = True
         ficha.save()
     return redirect('core:listar_fichas')
+
+def remover_ficha_adulto(request):
+    if request.method == 'POST':
+        ficha_id = request.POST.get('ficha_id')
+        ficha = get_object_or_404(CatequeseAdultoModel, id=ficha_id)
+        ficha.delete()
+    return redirect('core:listar_fichas')
+
+def total(request):
+    # Catequese Infantil
+    qs = (
+        CatequeseInfantilModel.objects
+        .values('horario')
+        .annotate(quantidade=Count('id'))
+        .order_by('-quantidade')
+    )
+    horarios_dict = dict(CatequeseInfantilModel.HORARIO_CATEQUESE)
+    total_catequese_infantil = [
+        {
+            "titulo": horarios_dict.get(item["horario"]),
+            "quantidade": item["quantidade"]
+        }
+        for item in qs
+    ]
+    # Crisma
+    qs = (
+        CrismaModel.objects
+        .values('horario')
+        .annotate(quantidade=Count('id'))
+        .order_by('-quantidade')
+    )
+    horarios_dict = dict(CrismaModel.HORARIO_CRISMA)
+    total_crisma = [
+        {
+            "titulo": horarios_dict.get(item["horario"]),
+            "quantidade": item["quantidade"]
+        }
+        for item in qs
+    ]
+    # Perseverança / MEJ
+    qs = (
+        Perseveranca_MEJ_Model.objects
+        .values('horario')
+        .annotate(quantidade=Count('id'))
+        .order_by('-quantidade')
+    )
+    horarios_dict = dict(Perseveranca_MEJ_Model.HORARIO_PERSEVERANCA)
+    total_perseveranca_mej = [
+        {
+            "titulo": horarios_dict.get(item["horario"]),
+            "quantidade": item["quantidade"]
+        }
+        for item in qs
+    ]
+    # Catequese Adulto
+    qs = (
+        CatequeseAdultoModel.objects
+        .values('horario')
+        .annotate(quantidade=Count('id'))
+        .order_by('-quantidade')
+    )
+    horarios_dict = dict(CatequeseAdultoModel.HORARIO_CATEQUESE_ADULTO)
+    total_catequese_adulto = [
+        {
+            "titulo": horarios_dict.get(item["horario"]),
+            "quantidade": item["quantidade"]
+        }
+        for item in qs
+    ]
+
+    contexto = {
+        'mensagem': 'Relatório de Inscrições por Horário',
+        'total_catequese_infantil': total_catequese_infantil,
+        'total_crisma': total_crisma,
+        'total_perseveranca_mej': total_perseveranca_mej,
+        'total_catequese_adulto': total_catequese_adulto,
+    }
+    return render(request, 'contador_fichas.html', contexto)
 
 @login_required
 def exportar_excel(request):
