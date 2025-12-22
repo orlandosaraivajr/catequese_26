@@ -188,6 +188,15 @@ class CatequeseInfantilForm(ModelForm):
             if not batizado_celebrante:
                 self.add_error('batizado_celebrante', 'Informe o celebrante do batismo.')
 
+        horario = cleaned_data.get('horario')
+        qs = CatequeseInfantilModel.objects.filter(horario=horario)
+        if qs.count() >= 20:
+                raise forms.ValidationError(
+                    f"Limite de 20 catequizandos atingido para este horário."
+                )
+        
+        return cleaned_data
+
 
 class CrismaForm(ModelForm):
     class Meta:

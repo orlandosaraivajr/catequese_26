@@ -1,7 +1,9 @@
 import datetime
 from django.test import TestCase
+from core.models import CatequeseInfantilModel
 from core.forms import CatequeseInfantilForm
 from django.utils import timezone
+
 
 
 class CatequeseInfantilFormHorarioTests(TestCase):
@@ -132,3 +134,90 @@ class CatequeseInfantilFormHorarioTests(TestCase):
         )
         self.assertFalse(form.is_valid())
         self.assertIn("adulto", form.errors.get("horario")[0])
+
+
+class CatequeseInfantilFormLimiteHorarioTests(TestCase):
+
+    def setUp(self):
+        self.base_data = {
+            'nome': 'Maria Silva',
+            'sexo': 'F',
+            'data_nascimento': datetime.date(2018, 5, 10),
+            'naturalidade': 'São Paulo',
+
+            'nome_pai': 'João da Silva',
+            'nome_mae': 'Ana da Silva',
+
+            'endereco': 'Rua teste',
+            'cidade': 'SP',
+            'uf': 'SP',
+
+            'celular_pai': '1199999',
+            'celular_mae': '1199999',
+
+            'batizado': False,
+
+            'horario': '1',  # horário alvo do teste
+
+            'possui_deficiencia': False,
+            'possui_transtorno': False,
+            'medicamento_uso_continuo': False,
+            'acompanhamento_psicologico': False,
+
+            'nome_responsavel': 'Maria Souza',
+            'cpf_responsavel': '00011122233',
+            'endereco_responsavel': 'Rua teste'
+        }
+
+    # helper
+    def make_form(self, **kwargs):
+        data = self.base_data.copy()
+        data.update(kwargs)
+        return CatequeseInfantilForm(data=data)
+
+    def test_limite_20_por_horario_valido(self):
+        """
+        Deve aceitar cadastro quando ainda houver menos de 20 registros
+        no mesmo horário
+        """
+        for i in range(19):
+            CatequeseInfantilModel.objects.create(
+                nome=f"Crianca {i}",
+                sexo='F',
+                data_nascimento=datetime.date(2018, 1, 1),
+                naturalidade='SP',
+                horario='1'
+            )
+
+        form = self.make_form(
+            nome='Nova Criança',
+            data_nascimento=datetime.date(2018, 2, 2),
+            horario='1'
+        )
+        self.assertTrue(form.is_valid())
+
+    def test_limite_20_por_horario_invalido(self):
+        """
+        Deve impedir o cadastro quando já existirem 20 registros
+        no mesmo horário
+        """
+        for i in range(20):
+            CatequeseInfantilModel.objects.create(
+                nome=f"Crianca {i}",
+                sexo='F',
+                data_nascimento=datetime.date(2018, 1, 1),
+                naturalidade='SP',
+                horario='1'
+            )
+
+        form = self.make_form(
+            nome='Crianca Excedente',
+            data_nascimento=datetime.date(2018, 3, 3),
+            horario='1'
+        )
+
+        self.assertFalse(form.is_valid())
+        self.assertIn(
+            "Limite de 20 catequizandos atingido",
+            form.non_field_errors()[0]
+        )
