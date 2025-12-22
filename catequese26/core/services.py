@@ -2143,7 +2143,7 @@ def gerar_Workbook():
     wb = openpyxl.Workbook()
     ws = wb.active
     ws.title = "Catequese Infantil"
-    list_header = ['Nome','Nome do Pai','Nome da Mãe','Endereço','Cidade','UF','Celular do Pai','Celular da Mãe',]
+    list_header = ['Nome','Sexo','Data de Nascimento','Naturalidade','Nome do Pai','Nome da Mãe','Endereço','Cidade','UF','Celular do Pai','Celular da Mãe',]
     list_header += ['Batizado','Data do Batismo','Diocese do Batismo','Paróquia do Batismo','Celebrante do Batismo']
     list_header += ['Horário da Catequese']
     list_header += ['Possui Deficiência', 'Descrição da Deficiência', 'Possui Transtorno', 'Descrição do Transtorno']
@@ -2155,6 +2155,9 @@ def gerar_Workbook():
     for registro in qs:
         ws.append([
             registro.nome,
+            registro.sexo,
+            registro.data_nascimento.strftime('%d/%m/%Y') if registro.data_nascimento else '',
+            registro.naturalidade,
             registro.nome_pai,
             registro.nome_mae,
             registro.endereco,
@@ -2189,6 +2192,9 @@ def gerar_Workbook():
     qs = CrismaModel.objects.all().order_by('id')
     list_header = [
         'Nome',
+        'Sexo',
+        'Data de Nascimento',
+        'Naturalidade',
         'Nome do Pai',
         'Nome da Mãe',
         'Endereço',
@@ -2255,6 +2261,9 @@ def gerar_Workbook():
     for registro in qs:
         ws.append([
             registro.nome,
+            registro.sexo,
+            registro.data_nascimento.strftime('%d/%m/%Y') if registro.data_nascimento else '',
+            registro.naturalidade,
             registro.nome_pai,
             registro.nome_mae,
             registro.endereco,
@@ -2307,6 +2316,9 @@ def gerar_Workbook():
     qs = Perseveranca_MEJ_Model.objects.all().order_by('id')
     list_header = [
         'Nome',
+        'Sexo',
+        'Data de Nascimento',
+        'Naturalidade',
         'Nome do Pai',
         'Nome da Mãe',
         'Endereço',
@@ -2371,6 +2383,9 @@ def gerar_Workbook():
     for registro in qs:
         ws.append([
             registro.nome,
+            registro.sexo,
+            registro.data_nascimento.strftime('%d/%m/%Y') if registro.data_nascimento else '',
+            registro.naturalidade,
             registro.nome_pai,
             registro.nome_mae,
             registro.endereco,
@@ -2420,6 +2435,9 @@ def gerar_Workbook():
     
     list_header = [
         'Nome',
+        'Sexo',
+        'Data de Nascimento',
+        'Naturalidade',
         'CPF',
         'Celular',
         'Nome do Pai',
@@ -2471,6 +2489,9 @@ def gerar_Workbook():
     for registro in qs:
         ws.append([
             registro.nome,
+            registro.sexo,
+            registro.data_nascimento.strftime('%d/%m/%Y') if registro.data_nascimento else '',
+            registro.naturalidade,
             registro.cpf,
             registro.celular,
             registro.nome_pai,
