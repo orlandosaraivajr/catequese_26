@@ -10,6 +10,7 @@ urlpatterns = [
     path('perseveranca', views.perseveranca_mej, name='perseveranca_mej'),
     path('catequese_adulto', views.catequese_adulto, name='catequese_adulto'),
     path('procure-secretaria', views.procure_secretaria, name='procure_secretaria'),
+    path('noivos', views.noivos, name='noivos'),
     # Secretaria
     path('secretaria', views.listar_fichas, name='secretaria'),
     path('listar-fichas/', views.listar_fichas, name='listar_fichas'),

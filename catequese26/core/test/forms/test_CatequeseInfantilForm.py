@@ -192,7 +192,7 @@ class CatequeseInfantilFormLimiteHorarioTests(TestCase):
         form = self.make_form(
             nome='Nova Criança',
             data_nascimento=datetime.date(2018, 2, 2),
-            horario='1'
+            horario='9'
         )
         self.assertTrue(form.is_valid())
 
@@ -207,15 +207,14 @@ class CatequeseInfantilFormLimiteHorarioTests(TestCase):
                 sexo='F',
                 data_nascimento=datetime.date(2018, 1, 1),
                 naturalidade='SP',
-                horario='1'
+                horario='9'
             )
 
         form = self.make_form(
             nome='Crianca Excedente',
             data_nascimento=datetime.date(2018, 3, 3),
-            horario='1'
+            horario='9'
         )
-
         self.assertFalse(form.is_valid())
         self.assertIn(
             "Limite de 20 catequizandos atingido",

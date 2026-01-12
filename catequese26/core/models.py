@@ -272,3 +272,44 @@ class CatequeseAdultoModel(models.Model):
 
     def __str__(self):
         return self.nome
+    
+class NoivoModel(models.Model):
+    nome_noivo = models.CharField(max_length=150)
+    endereco_noivo = models.CharField(max_length=255)
+    celular_noivo = models.CharField(max_length=20, default='')
+    data_nascimento_noivo = models.DateField()
+    profissao_noivo = models.CharField(max_length=100)
+    local_trabalho_noivo = models.CharField(max_length=100)
+    religiao_noivo = models.CharField(max_length=100)
+    restricao_alimentar_noivo = models.CharField(max_length=100)
+    nome_pai_noivo = models.CharField(max_length=150, default='')
+    nome_mae_noivo = models.CharField(max_length=150, default='')
+    endereco_pais_noivo = models.CharField(max_length=255)
+    celular_pais_noivo = models.CharField(max_length=20, default='')
+    religiao_pais_noivo = models.CharField(max_length=100)
+
+    nome_noiva = models.CharField(max_length=150)
+    endereco_noiva = models.CharField(max_length=255)
+    celular_noiva = models.CharField(max_length=20, default='')
+    data_nascimento_noiva = models.DateField()
+    profissao_noiva = models.CharField(max_length=100)
+    local_trabalho_noiva = models.CharField(max_length=100)
+    religiao_noiva = models.CharField(max_length=100)
+    restricao_alimentar_noiva = models.CharField(max_length=100)
+    nome_pai_noiva = models.CharField(max_length=150, default='')
+    nome_mae_noiva = models.CharField(max_length=150, default='')
+    endereco_pais_noiva = models.CharField(max_length=255)
+    celular_pais_noiva = models.CharField(max_length=20, default='')
+    religiao_pais_noiva = models.CharField(max_length=100)      
+    
+    data_provavel_casamento = models.DateField()
+    paroquia_casamento = models.CharField(max_length=100)      
+
+    # Ficha Impressa
+    ficha_impressa = models.BooleanField(default=False)
+    ficha_assinada = models.BooleanField(default=False)
+
+    criado_em = models.DateTimeField(default=timezone.now)
+    
+    def __str__(self):
+        return self.nome_noivo + " e " + self.nome_noiva

@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 from datetime import date
-from .models import CatequeseInfantilModel, CrismaModel, Perseveranca_MEJ_Model, CatequeseAdultoModel
+from .models import CatequeseInfantilModel, CrismaModel, Perseveranca_MEJ_Model, CatequeseAdultoModel, NoivoModel
 
 
 class CatequeseInfantilForm(ModelForm):
@@ -649,3 +649,95 @@ class CatequeseAdultoForm(forms.ModelForm):
                     self.add_error(campo, "Campo obrigatório para quem é casado na igreja.")
 
         return cleaned
+
+
+class NoivoForm(forms.ModelForm):
+
+    class Meta:
+        model = NoivoModel
+        fields = "__all__"
+        exclude = ['ficha_impressa', 'ficha_assinada','criado_em']
+
+        labels = {
+            # Noivo
+            "nome_noivo": "Nome completo do noivo",
+            "endereco_noivo": "Endereço do noivo",
+            "celular_noivo": "Celular do noivo",
+            "data_nascimento_noivo": "Data de nascimento do noivo",
+            "profissao_noivo": "Profissão do noivo",
+            "local_trabalho_noivo": "Local de trabalho do noivo",
+            "religiao_noivo": "Religião do noivo",
+            "restricao_alimentar_noivo": "Alguma restrição alimentar? Se sim, qual?",
+            "nome_pai_noivo": "Nome do Pai do noivo ou Responsável",
+            "nome_mae_noivo": "Nome da mãe do noivo ou Responsável",
+            "endereco_pais_noivo": "Endereço dos pais do noivo",
+            "celular_pais_noivo": "Telefone Fixo ou Celular dos pais do noivo",
+            "religiao_pais_noivo": "Religião dos pais do noivo",
+
+            # Noiva
+            "nome_noiva": "Nome completo da noiva",
+            "endereco_noiva": "Endereço da noiva",
+            "celular_noiva": "Celular da noiva",
+            "data_nascimento_noiva": "Data de nascimento da noiva",
+            "profissao_noiva": "Profissão da noiva",
+            "local_trabalho_noiva": "Local de trabalho da noiva",
+            "religiao_noiva": "Religião da noiva",
+            "restricao_alimentar_noiva": "Alguma restrição alimentar? Se sim, qual?",
+            "nome_pai_noiva": "Nome do pai da noiva ou Responsável",
+            "nome_mae_noiva": "Nome da mãe da noiva ou Responsável",
+            "endereco_pais_noiva": "Endereço dos pais da noiva",
+            "celular_pais_noiva": "Celular dos pais da noiva",
+            "religiao_pais_noiva": "Religião dos pais da noiva",
+
+            # Casamento
+            "data_provavel_casamento": "Data provável do casamento",
+            "paroquia_casamento": "Paróquia do casamento",
+        }
+
+        widgets = {
+            # Noivo
+            "nome_noivo": forms.TextInput(attrs={"class": "form-control"}),
+            "endereco_noivo": forms.TextInput(attrs={"class": "form-control"}),
+            "celular_noivo": forms.TextInput(attrs={"class": "form-control", "placeholder": "(99) 99999-9999"}),
+            "data_nascimento_noivo": forms.DateInput(attrs={"class": "form-control", "type": "date"}),
+            "profissao_noivo": forms.TextInput(attrs={"class": "form-control"}),
+            "local_trabalho_noivo": forms.TextInput(attrs={"class": "form-control"}),
+            "religiao_noivo": forms.TextInput(attrs={"class": "form-control"}),
+            "restricao_alimentar_noivo": forms.TextInput(attrs={"class": "form-control"}),
+            "nome_pai_noivo": forms.TextInput(attrs={"class": "form-control"}),
+            "nome_mae_noivo": forms.TextInput(attrs={"class": "form-control"}),
+            "endereco_pais_noivo": forms.TextInput(attrs={"class": "form-control"}),
+            "celular_pais_noivo": forms.TextInput(attrs={"class": "form-control", "placeholder": "(99) 99999-9999"}),
+            "religiao_pais_noivo": forms.TextInput(attrs={"class": "form-control"}),
+
+            # Noiva
+            "nome_noiva": forms.TextInput(attrs={"class": "form-control"}),
+            "endereco_noiva": forms.TextInput(attrs={"class": "form-control"}),
+            "celular_noiva": forms.TextInput(attrs={"class": "form-control", "placeholder": "(99) 99999-9999"}),
+            "data_nascimento_noiva": forms.DateInput(attrs={"class": "form-control", "type": "date"}),
+            "profissao_noiva": forms.TextInput(attrs={"class": "form-control"}),
+            "local_trabalho_noiva": forms.TextInput(attrs={"class": "form-control"}),
+            "religiao_noiva": forms.TextInput(attrs={"class": "form-control"}),
+            "restricao_alimentar_noiva": forms.TextInput(attrs={"class": "form-control"}),
+            "nome_pai_noiva": forms.TextInput(attrs={"class": "form-control"}),
+            "nome_mae_noiva": forms.TextInput(attrs={"class": "form-control"}),
+            "endereco_pais_noiva": forms.TextInput(attrs={"class": "form-control"}),
+            "celular_pais_noiva": forms.TextInput(attrs={"class": "form-control", "placeholder": "(99) 99999-9999"}),
+            "religiao_pais_noiva": forms.TextInput(attrs={"class": "form-control"}),
+
+            # Casamento
+            "data_provavel_casamento": forms.DateInput(attrs={"class": "form-control", "type": "date"}),
+            "paroquia_casamento": forms.TextInput(attrs={"class": "form-control"}),
+        }
+
+    def clean_nome_noivo(self):
+        nome = self.cleaned_data.get("nome_noivo", "").strip()
+        if len(nome.split()) < 2:
+            raise forms.ValidationError("Digite o nome completo do noivo.")
+        return nome
+
+    def clean_nome_noiva(self):
+        nome = self.cleaned_data.get("nome_noiva", "").strip()
+        if len(nome.split()) < 2:
+            raise forms.ValidationError("Digite o nome completo da noiva.")
+        return nome
