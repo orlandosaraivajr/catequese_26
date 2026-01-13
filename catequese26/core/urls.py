@@ -31,6 +31,10 @@ urlpatterns = [
     path('imprimir-ficha-adulto', views.imprimir_ficha_adulto, name='imprimir_ficha_adulto'),
     path('assinar-ficha-adulto', views.assinar_ficha_adulto, name='assinar_ficha_adulto'),
     path('remover-ficha-adulto', views.remover_ficha_adulto, name='remover_ficha_adulto'),
+    # Noivos
+    path('imprimir-ficha-noivos', views.imprimir_ficha_noivos, name='imprimir_ficha_noivos'),
+    path('assinar-ficha-noivos', views.assinar_ficha_noivos, name='assinar_ficha_noivos'),
+    path('remover-ficha-noivos', views.remover_ficha_noivos, name='remover_ficha_noivos'),
     # Exportar Excel
     path('total', views.total, name='total'),
     path('excel', views.exportar_excel, name='exportar-excel'),

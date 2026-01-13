@@ -5,7 +5,7 @@ from django.http import HttpResponse, FileResponse
 from django.db.models import Count
 from .forms import CatequeseInfantilForm, CrismaForm, PerseverancaMejForm, CatequeseAdultoForm, NoivoForm
 from .models import CatequeseInfantilModel, CrismaModel, Perseveranca_MEJ_Model, CatequeseAdultoModel, NoivoModel
-from .services import gerar_ficha_catequese, gerar_ficha_crisma, gerar_ficha_perseveranca_mej, gerar_ficha_catequese_adulto, gerar_Workbook
+from .services import gerar_ficha_catequese, gerar_ficha_crisma, gerar_ficha_perseveranca_mej, gerar_ficha_catequese_adulto, gerar_ficha_noivos ,  gerar_Workbook
 
 
 def index(request):
@@ -69,9 +69,11 @@ def listar_fichas(request):
     fichasCrisma = CrismaModel.objects.filter(ficha_impressa=False).filter(ficha_assinada=False).order_by('nome')
     fichasMEJ = Perseveranca_MEJ_Model.objects.filter(ficha_impressa=False).filter(ficha_assinada=False).order_by('nome')
     fichasAdultos = CatequeseAdultoModel.objects.filter(ficha_impressa=False).filter(ficha_assinada=False).order_by('nome')
+    fichasNoivos = NoivoModel.objects.filter(ficha_impressa=False).filter(ficha_assinada=False).order_by('nome_noivo')
     mensagem = 'Fichas Pendentes de Impressão'
     contexto = {'fichas': fichas,'fichasCrisma': fichasCrisma, 
                 'fichasMEJ': fichasMEJ,'fichasAdultos': fichasAdultos,
+                'fichasNoivos': fichasNoivos,
                 'mensagem': mensagem}
     return render(request, 'listar_fichas.html', contexto)
 
@@ -80,9 +82,11 @@ def listar_todas_fichas(request):
     fichasCrisma = CrismaModel.objects.all().filter(ficha_assinada=False).order_by('nome')
     fichasMEJ = Perseveranca_MEJ_Model.objects.all().filter(ficha_assinada=False).order_by('nome')
     fichasAdultos = CatequeseAdultoModel.objects.all().filter(ficha_assinada=False).order_by('nome')
+    fichasNoivos = NoivoModel.objects.all().filter(ficha_assinada=False).order_by('nome_noivo')
     mensagem = 'Fichas Pendentes de Impressão'
     contexto = {'fichas': fichas,'fichasCrisma': fichasCrisma, 
                 'fichasMEJ': fichasMEJ,'fichasAdultos': fichasAdultos,
+                'fichasNoivos': fichasNoivos,
                 'mensagem': mensagem}
     return render(request, 'listar_fichas.html', contexto)
 
@@ -183,6 +187,31 @@ def remover_ficha_adulto(request):
     if request.method == 'POST':
         ficha_id = request.POST.get('ficha_id')
         ficha = get_object_or_404(CatequeseAdultoModel, id=ficha_id)
+        ficha.delete()
+    return redirect('core:listar_fichas')
+
+def imprimir_ficha_noivos(request):
+    if request.method == 'POST':
+        ficha_id = request.POST.get('ficha_id')
+        ficha = get_object_or_404(NoivoModel, id=ficha_id)
+        ficha.ficha_impressa = True
+        ficha.save()
+        pdf_path = gerar_ficha_noivos(ficha)
+        return FileResponse(open(pdf_path, 'rb'), content_type='application/pdf')
+    return redirect('core:listar_fichas')
+
+def assinar_ficha_noivos(request):
+    if request.method == 'POST':
+        ficha_id = request.POST.get('ficha_id')
+        ficha = get_object_or_404(NoivoModel, id=ficha_id)
+        ficha.ficha_assinada = True
+        ficha.save()
+    return redirect('core:listar_fichas')
+
+def remover_ficha_noivos(request):
+    if request.method == 'POST':
+        ficha_id = request.POST.get('ficha_id')
+        ficha = get_object_or_404(NoivoModel, id=ficha_id)
         ficha.delete()
     return redirect('core:listar_fichas')
 
