@@ -154,8 +154,10 @@ class Perseveranca_MEJ_Model(models.Model):
     )
     
     HORARIO_PERSEVERANCA = (
-        ("1", "Perseverança e MEJ - 11 a 14 anos - Quinta às 19:30h"),
-        ("2", "MEJ - 15 a 25 anos - Quinta às 19:30h"),
+        ("1", "Perseverança e MEJ - 11 a 14 anos - Quinta às 19:30h - Encontros na Capela NSGraças"),
+        ("2", "MEJ - 15 a 25 anos - Quinta às 19:30h - Encontros na Capela NSGraças"),
+        ("3", "Perseverança e MEJ - 11 a 14 anos - Terça às 19:30h - Encontros na Capela NSGraças"),
+        ("4", "MEJ - 15 a 25 anos - Terça às 19:30h - Encontros na Capela NSGraças"),
     )
 
     nome = models.CharField(max_length=150)
