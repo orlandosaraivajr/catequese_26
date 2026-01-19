@@ -385,7 +385,77 @@
             Nenhuma ficha noivado pendente de impressão.
         </div>
     {% endif %}
+<br>
+    {% if fichasCoroinhas %}
+        <div class="card shadow-sm">
+            <div class="card-body">
 
+                <table class="table table-hover align-middle">
+                    <thead style="background-color: #b30000; color: white;">
+                        <tr>
+                            <th>Coroinhas</th>
+                        </tr>
+                        <tr>
+                            <th>Coroinha</th>
+                            <th style="width: 150px;">Ação</th>
+                            <th style="width: 150px;"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ficha in fichasCoroinhas %}
+                        <tr>
+                            <td>{{ ficha.nome }}</td>
+                            <td>
+                                <form method="POST" action="{% url 'core:imprimir_ficha_coroinhas' %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="ficha_id" value="{{ ficha.id }}">
+
+                                    {% if ficha.ficha_impressa %}
+                                            <button class="btn btn-warning btn-sm" type="submit">
+                                                Reimprimir
+                                            </button>
+                                            
+                                        {% else %}
+                                            <button class="btn btn-primary btn-sm" type="submit">
+                                                Imprimir
+                                            </button>
+                                        {% endif %}
+                                </form>
+                            </td>
+                            <td>
+                                {% if ficha.ficha_impressa %}
+                                    <form method="POST" action="{% url 'core:assinar_ficha_coroinhas' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="ficha_id" value="{{ ficha.id }}">
+                                            <button class="btn btn-danger btn-sm" type="submit">
+                                                Assinada
+                                            </button>
+                                    </form>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if ficha.ficha_impressa %}
+                                    <form method="POST" action="{% url 'core:remover_ficha_coroinhas' %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="ficha_id" value="{{ ficha.id }}">
+                                            <button class="btn btn-danger btn-sm" type="submit">
+                                                Deletar
+                                            </button>
+                                    </form>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    {% else %}
+        <div class="alert alert-info text-center">
+            Nenhuma ficha coroinha pendente de impressão.
+        </div>
+    {% endif %}
 
     <div class="text-center mt-4">
         <a href="{% url 'core:listar_fichas' %}" class="btn btn-secondary">
