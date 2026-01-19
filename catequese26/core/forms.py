@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 from datetime import date
-from .models import CatequeseInfantilModel, CrismaModel, Perseveranca_MEJ_Model, CatequeseAdultoModel, NoivoModel
+from .models import CatequeseInfantilModel, CrismaModel, Perseveranca_MEJ_Model, CatequeseAdultoModel, NoivoModel, CoroinhaModel
 
 
 class CatequeseInfantilForm(ModelForm):
@@ -154,7 +154,7 @@ class CatequeseInfantilForm(ModelForm):
         pre_catequese = ['1','2','3','4']
         catequese = ['5','6','7','8','9']
         doze_mais = ['10','11']
-        ano_base = date.today().year + 1
+        ano_base = date.today().year
         idade_projetada = ano_base - ano_nascimento
         if idade_projetada >= 6 and idade_projetada <= 8:
             if horario not in pre_catequese:
@@ -740,4 +740,97 @@ class NoivoForm(forms.ModelForm):
         nome = self.cleaned_data.get("nome_noiva", "").strip()
         if len(nome.split()) < 2:
             raise forms.ValidationError("Digite o nome completo da noiva.")
+        return nome
+
+
+class CoroinhaForm(ModelForm):
+    class Meta:
+        model = CoroinhaModel
+        fields = '__all__'
+        exclude = ['ficha_impressa', 'ficha_assinada', 'criado_em']
+
+        labels = {
+            # Dados principais
+            'nome': 'Nome Completo:',
+            'sexo': 'Sexo:',
+            'data_nascimento': 'Data de Nascimento:',
+
+            # Endereço
+            'endereco': 'Endereço:',
+            'cidade': 'Cidade:',
+            'uf': 'UF:',
+
+            # Filiação
+            'nome_pai': 'Nome do Pai:',
+            'celular_pai': 'Celular do Pai:',
+            'nome_mae': 'Nome da Mãe:',
+            'celular_mae': 'Celular da Mãe:',
+
+            # Responsável
+            'nome_responsavel': 'Nome do Responsável (para direito de imagem):',
+            'cpf_responsavel': 'CPF do Responsável:',
+            'endereco_responsavel': 'Endereço do Responsável:',
+        }
+
+        widgets = {
+            # Dados principais
+            'nome': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Digite o nome completo'
+            }),
+            'sexo': forms.Select(attrs={'class': 'form-select'}),
+            'data_nascimento': forms.DateInput(attrs={
+                'class': 'form-control',
+                'type': 'date'
+            }),
+
+            # Endereço
+            'endereco': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': 'Rua, número, bairro'
+            }),
+            'cidade': forms.TextInput(attrs={'class': 'form-control'}),
+            'uf': forms.TextInput(attrs={
+                'class': 'form-control',
+                'maxlength': 2,
+                'placeholder': 'Ex: SP'
+            }),
+
+            # Filiação
+            'nome_pai': forms.TextInput(attrs={'class': 'form-control'}),
+            'celular_pai': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': '(11) 99999-9999'
+            }),
+            'nome_mae': forms.TextInput(attrs={'class': 'form-control'}),
+            'celular_mae': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': '(11) 99999-9999'
+            }),
+
+            # Responsável
+            'nome_responsavel': forms.TextInput(attrs={'class': 'form-control'}),
+            'cpf_responsavel': forms.TextInput(attrs={
+                'class': 'form-control',
+                'placeholder': '000.000.000-00'
+            }),
+            'endereco_responsavel': forms.TextInput(attrs={'class': 'form-control'}),
+        }
+
+        error_messages = {
+            'nome': {'required': 'Informe o nome do coroinha.'},
+            'data_nascimento': {'required': 'Informe a data de nascimento.'},
+            'endereco': {'required': 'Informe o endereço.'},
+            'cidade': {'required': 'Informe a cidade.'},
+            'uf': {'required': 'Informe o estado (UF).'},
+            'nome_responsavel': {'required': 'Informe o nome do responsável.'},
+            'cpf_responsavel': {'required': 'Informe o CPF do responsável.'},
+        }
+
+    def clean_nome(self):
+        nome = self.cleaned_data.get('nome', '').strip()
+        if len(nome.split()) < 2:
+            raise forms.ValidationError(
+                "Erro: Digite o nome completo."
+            )
         return nome

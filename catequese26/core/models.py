@@ -315,3 +315,36 @@ class NoivoModel(models.Model):
     
     def __str__(self):
         return self.nome_noivo + " e " + self.nome_noiva
+
+
+class CoroinhaModel(models.Model):
+    SEXO_CHOICES = (
+        ("M", "Masculino"),
+        ("F", "Feminino"),
+    )
+    nome = models.CharField(max_length=150)
+    sexo = models.CharField(max_length=1, choices=SEXO_CHOICES)
+    data_nascimento = models.DateField()
+    endereco = models.CharField(max_length=255)
+    cidade = models.CharField(max_length=100)
+    uf = models.CharField(max_length=2)
+
+    nome_pai = models.CharField(max_length=150, default='')
+    celular_pai = models.CharField(max_length=20, default='')
+    nome_mae = models.CharField(max_length=150, default='')
+    celular_mae = models.CharField(max_length=20, default='')
+
+    # Termo de uso de Imagem
+    
+    nome_responsavel = models.CharField(max_length=150)
+    cpf_responsavel = models.CharField(max_length=14)
+    endereco_responsavel = models.CharField(max_length=255)
+    
+    # Ficha Impressa
+    ficha_impressa = models.BooleanField(default=False)
+    ficha_assinada = models.BooleanField(default=False)
+
+    criado_em = models.DateTimeField(default=timezone.now)
+    
+    def __str__(self):
+        return self.nome

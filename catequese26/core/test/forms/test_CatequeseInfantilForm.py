@@ -104,7 +104,7 @@ class CatequeseInfantilFormHorarioTests(TestCase):
     # horários permitidos = ['10','11']
     # ------------------------------------------------
     def test_12mais_valido(self):
-        ano_atual = timezone.now().year + 1
+        ano_atual = timezone.now().year
         ano_nascimento = ano_atual - 12  # idade 12
         form = self.make_form(
             data_nascimento=datetime.date(ano_nascimento, 1, 1),
@@ -142,7 +142,7 @@ class CatequeseInfantilFormLimiteHorarioTests(TestCase):
         self.base_data = {
             'nome': 'Maria Silva',
             'sexo': 'F',
-            'data_nascimento': datetime.date(2018, 5, 10),
+            'data_nascimento': datetime.date(2019, 5, 10),
             'naturalidade': 'São Paulo',
 
             'nome_pai': 'João da Silva',
@@ -157,7 +157,7 @@ class CatequeseInfantilFormLimiteHorarioTests(TestCase):
 
             'batizado': False,
 
-            'horario': '1',  # horário alvo do teste
+            'horario': '5',  # horário alvo do teste
 
             'possui_deficiencia': False,
             'possui_transtorno': False,
@@ -184,14 +184,14 @@ class CatequeseInfantilFormLimiteHorarioTests(TestCase):
             CatequeseInfantilModel.objects.create(
                 nome=f"Crianca {i}",
                 sexo='F',
-                data_nascimento=datetime.date(2018, 1, 1),
+                data_nascimento=datetime.date(2019, 1, 1),
                 naturalidade='SP',
-                horario='1'
+                horario='5'
             )
 
         form = self.make_form(
             nome='Nova Criança',
-            data_nascimento=datetime.date(2018, 2, 2),
+            data_nascimento=datetime.date(2017, 2, 2),
             horario='9'
         )
         self.assertTrue(form.is_valid())
@@ -207,13 +207,13 @@ class CatequeseInfantilFormLimiteHorarioTests(TestCase):
                 sexo='F',
                 data_nascimento=datetime.date(2018, 1, 1),
                 naturalidade='SP',
-                horario='9'
+                horario='5'
             )
 
         form = self.make_form(
             nome='Crianca Excedente',
-            data_nascimento=datetime.date(2018, 3, 3),
-            horario='9'
+            data_nascimento=datetime.date(2017, 3, 3),
+            horario='5'
         )
         self.assertFalse(form.is_valid())
         self.assertIn(

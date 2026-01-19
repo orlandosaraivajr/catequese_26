@@ -11,6 +11,7 @@ urlpatterns = [
     path('catequese_adulto', views.catequese_adulto, name='catequese_adulto'),
     path('procure-secretaria', views.procure_secretaria, name='procure_secretaria'),
     path('noivos', views.noivos, name='noivos'),
+    path('coroinhas', views.coroinhas, name='coroinhas'),
     # Secretaria
     path('secretaria', views.listar_fichas, name='secretaria'),
     path('listar-fichas/', views.listar_fichas, name='listar_fichas'),
@@ -35,6 +36,10 @@ urlpatterns = [
     path('imprimir-ficha-noivos', views.imprimir_ficha_noivos, name='imprimir_ficha_noivos'),
     path('assinar-ficha-noivos', views.assinar_ficha_noivos, name='assinar_ficha_noivos'),
     path('remover-ficha-noivos', views.remover_ficha_noivos, name='remover_ficha_noivos'),
+    # Coroinhas
+    #path('imprimir-ficha-coroinhas', views.imprimir_ficha_coroinhas, name='imprimir_ficha_coroinhas'),
+    #path('assinar-ficha-coroinhas', views.assinar_ficha_coroinhas, name='assinar_ficha_coroinhas'),
+    #path('remover-ficha-coroinhas', views.remover_ficha_coroinhas, name='remover_ficha_coroinhas'),
     # Exportar Excel
     path('total', views.total, name='total'),
     path('excel', views.exportar_excel, name='exportar-excel'),

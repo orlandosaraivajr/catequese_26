@@ -3,8 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.utils.timezone import localtime
 from django.http import HttpResponse, FileResponse
 from django.db.models import Count
-from .forms import CatequeseInfantilForm, CrismaForm, PerseverancaMejForm, CatequeseAdultoForm, NoivoForm
-from .models import CatequeseInfantilModel, CrismaModel, Perseveranca_MEJ_Model, CatequeseAdultoModel, NoivoModel
+from .forms import CatequeseInfantilForm, CrismaForm, PerseverancaMejForm, CatequeseAdultoForm, NoivoForm, CoroinhaForm
+from .models import CatequeseInfantilModel, CrismaModel, Perseveranca_MEJ_Model, CatequeseAdultoModel, NoivoModel, CoroinhaModel
 from .services import gerar_ficha_catequese, gerar_ficha_crisma, gerar_ficha_perseveranca_mej, gerar_ficha_catequese_adulto, gerar_ficha_noivos ,  gerar_Workbook
 
 
@@ -60,6 +60,16 @@ def noivos(request):
     else:
         form = NoivoForm()
     return render(request, 'noivos.html', {'form': form})
+
+def coroinhas(request):
+    if request.method == 'POST':
+        form = CoroinhaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('core:procure_secretaria')
+    else:
+        form = CoroinhaForm()
+    return render(request, 'coroinhas.html', {'form': form})
 
 def procure_secretaria(request):
     return render(request, 'procure_secretaria.html')
