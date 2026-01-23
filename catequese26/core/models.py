@@ -8,11 +8,11 @@ class CatequeseInfantilModel(models.Model):
     )
     
     HORARIO_CATEQUESE = (
-        ("1", "Pré-Catequese - Segunda às 19:30h"),
+#        ("1", "Pré-Catequese - Segunda às 19:30h"),
         ("2", "Pré-Catequese - Terça às 19:30h"),
         ("3", "Pré-Catequese - Sábado às 09h"),
         ("4", "Pré-Catequese - Sábado às 10:30h"),
-        ("5", "1a Etapa - Segunda às 19:30h"),
+#        ("5", "1a Etapa - Segunda às 19:30h"),
         ("6", "1a Etapa - Terça às 19:30h"),
         ("7", "1a Etapa - Quarta às 19:30h"),
         ("8", "1a Etapa - Sábado às 09h"),
@@ -224,7 +224,8 @@ class CatequeseAdultoModel(models.Model):
         ("F", "Feminino"),
     )
     HORARIO_CATEQUESE_ADULTO = (
-        ("1", "Terça às 19:30h"),
+#        ("1", "Terça às 19:30h"),
+        ("3", "Quarta às 19:30h"),
         ("2", "Sábado às 08h"),
     )
     
