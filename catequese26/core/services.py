@@ -1891,8 +1891,10 @@ def gerar_ficha_catequese_adulto(ficha):
     # Data de Nascimento
     c.setFont("Helvetica-Bold", 11)
     c.drawString(50, height - 280, f"Data Nascimento:")
+    c.drawString(300, height - 280, f"Telefone:")
     c.setFont("Helvetica", 11)
     c.drawString(150, height - 280, f"{ficha.data_nascimento.strftime("%d/%m/%Y")}")
+    c.drawString(350, height - 280, f"{ficha.celular}")
     
     # Naturalidade
     c.setFont("Helvetica-Bold", 11)
