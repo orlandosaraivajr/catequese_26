@@ -94,7 +94,7 @@ class CatequeseInfantilFormHorarioTests(TestCase):
         ano_nascimento = ano_atual - 10
         form = self.make_form(
             data_nascimento=datetime.date(ano_nascimento, 1, 1),
-            horario='3'  # inválido
+            horario='4'  # inválido
         )
         self.assertFalse(form.is_valid())
         self.assertIn("catequese.", form.errors.get("horario")[0])
@@ -117,7 +117,7 @@ class CatequeseInfantilFormHorarioTests(TestCase):
         ano_nascimento = ano_atual - 13  # idade 13
         form = self.make_form(
             data_nascimento=datetime.date(ano_nascimento, 1, 1),
-            horario='5'
+            horario='6'
         )
         self.assertFalse(form.is_valid())
         self.assertIn("catequese 12+", form.errors.get("horario")[0])
@@ -207,13 +207,13 @@ class CatequeseInfantilFormLimiteHorarioTests(TestCase):
                 sexo='F',
                 data_nascimento=datetime.date(2018, 1, 1),
                 naturalidade='SP',
-                horario='5'
+                horario='6'
             )
 
         form = self.make_form(
             nome='Crianca Excedente',
             data_nascimento=datetime.date(2017, 3, 3),
-            horario='5'
+            horario='6'
         )
         self.assertFalse(form.is_valid())
         self.assertIn(

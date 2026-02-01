@@ -46,7 +46,7 @@ class CatequeseInfantilPostSuccessTest(TestCase):
     'batizado_paroquia': 'Paróquia São João Batista',
     'batizado_celebrante': 'Pe. Antônio',
 
-    'horario': '3',                    # escolha válida das HORARIO_CATEQUESE
+    'horario': '4',                    # escolha válida das HORARIO_CATEQUESE
 
     # necessidades/medicação (opcionais)
     'possui_deficiencia': '',          # omita ou deixe vazio para False
