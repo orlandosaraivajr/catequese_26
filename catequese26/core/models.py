@@ -224,7 +224,7 @@ class CatequeseAdultoModel(models.Model):
         ("F", "Feminino"),
     )
     HORARIO_CATEQUESE_ADULTO = (
-#        ("1", "Terça às 19:30h"),
+        ("1", "Terça às 19:30h - COM Batismo"),
         ("3", "Quarta às 19:30h - COM Batismo"),
         ("4", "Quinta às 19:30h - SEM Batismo"),
         ("2", "Sábado às 08h - COM Batismo"),
